@@ -1,10 +1,17 @@
 #include "./headers/GameScene.hpp"
+#include "./headers/Ball.hpp"
 #include <iostream>
+
+
 using namespace std;
 #define MAX_ROAD_LEFT -5
 #define MAX_ROAD_RIGHT 5
 #define MAX_WIDTH 10
+
+extern Ball* userBall;
+
 int k =1;
+float road_speed = 0.1;
 float angle = 0;
 /* n je koliko polja vidimo u daljinu a m je koliko je detaljan put */ 
 void draw_road(int n,int m){
@@ -24,10 +31,10 @@ void draw_road(int n,int m){
 			glPushMatrix();
     			glTranslatef(0,-3,-1*(10));
     			glBegin(GL_POLYGON);
-    				glVertex3f(x0,0,z0);
-    				glVertex3f(x0,0,z1);
-    				glVertex3f(x1,0,z1);
-    				glVertex3f(x1,0,z0);
+    				glVertex3f(x0,0,z0 - road_speed);
+    				glVertex3f(x0,0,z1 - road_speed);
+    				glVertex3f(x1,0,z1 - road_speed);
+    				glVertex3f(x1,0,z0 - road_speed);
     			glEnd();
     		glPopMatrix();
     		color += 0.4;
@@ -54,17 +61,11 @@ void GameScene::run(){
     if(angle >= 360)
     	angle = 0;
     draw_road(100,10);
-    glColor3f(1,0,0);
-    glPushMatrix();
-    	glTranslatef(0,-2,-10);
-    	glRotatef(angle,-1,0,0);
-    	//
-		/* Kreira se objekat. */
-    	glColor3f(1, 0, 0);
-    	glutWireSphere(0.5,10,10);
-    glPopMatrix();
+    
+    userBall->draw();
 
     k+=1;
+    road_speed-=0.1;
 
 }
 

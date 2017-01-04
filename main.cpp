@@ -1,10 +1,13 @@
-#include <GL/glut.h>
+ #include <GL/glut.h>
 #include "./headers/GameScene.hpp"
+#include "./headers/Ball.hpp"
 
 #define MENU_SCREEN_NUM 0
 #define GAME_SCREEN_NUM 1
 #define OPTIONS_SCREEN_NUM 2
 
+
+Ball* userBall;
 GameScene* gameScene;
 unsigned int width,height;
 unsigned char gameState = 1; /* podrazumevano je da smo u menu screen-u */
@@ -37,6 +40,7 @@ int main(int argc, char** argv){
 	glEnable(GL_DEPTH_TEST);
 
 	gameScene = new GameScene();
+	userBall = new Ball();
 
     /* Program ulazi u glavnu petlju. */
 	glutMainLoop();
@@ -80,7 +84,9 @@ static void on_keyboard(unsigned char key,int x, int y){
 		case 'p':
 			timer = 0;
 			break;
+
 	}
+	std::cout << "key is " << key << std::endl;
 
 }
 
