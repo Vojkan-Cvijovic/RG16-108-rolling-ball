@@ -2,25 +2,26 @@
 #define __BALL_HPP__s
 #include <GL/glut.h>
 #include <iostream>
-
+#include <cmath>
 class Ball
 {
 public:
 	Ball(){}
 	~Ball();
-	void moveLeft(int k) {x -= k;}
-	void moveRight(int k){x += k;}
+	void move(float m);
 	void jump();
 	void draw();
-
+	bool isMoving();
 private:
 	float size = 0.75;
-	float weight = 1; // utice na skok
-	float x = 0,y = -2;
-	float rotationAngle = 0;
+	float weight = 1; // affects jump
+	float x = 0,y = -2,z=-4;
+	float rotationAngleX = 0;
+	float rotationAngleZ = 0;
 	bool isJumping = false;
 	float gravity = 1.2;
-	float yVel = 0;
+	float yVel = 0; // uses for jump
+	float xVel = 0; // uses for move
 };
 
 

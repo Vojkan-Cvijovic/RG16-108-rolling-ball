@@ -16,7 +16,7 @@ static void on_reshape(int x, int y);
 static void on_mouse();
 static void on_keyboard(unsigned char key, int x, int y);
 static void on_timer(int value);
-
+static void SpecialInput(int key, int x, int y);
 int timer = 0;
 
 int main(int argc, char** argv){
@@ -34,6 +34,7 @@ int main(int argc, char** argv){
 	glutKeyboardFunc(on_keyboard);
 	glutDisplayFunc(on_display);
 	glutReshapeFunc(on_reshape);
+	glutSpecialFunc(SpecialInput);
 
     /* Obavlja se OpenGL inicijalizacija. */
 	glClearColor(0,0,0,0);
@@ -57,7 +58,7 @@ static void on_reshape(int x,int y){
 	/* Podesava se projekcija */
 	glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(30, (float) width / height, 1, 500);
+    gluPerspective(60, (float) width / height, 1, 500);
 }
 static void on_keyboard(unsigned char key,int x, int y){
 	/* U zavisnosti u kom je stanju igrica imamo razlicite komanda
@@ -69,7 +70,7 @@ static void on_keyboard(unsigned char key,int x, int y){
 		case 'i':
 			gameScene->increaseSpeed();
 			break;
-		case 'd':
+		case 'o':
 			gameScene->decreaseSpeed();
 			break;
 		case 'r':
@@ -84,10 +85,18 @@ static void on_keyboard(unsigned char key,int x, int y){
 		case 'p':
 			timer = 0;
 			break;
-
 	}
-	std::cout << "key is " << key << std::endl;
+}
+static void SpecialInput(int key, int x, int y){
 
+	switch(key){
+		case GLUT_KEY_LEFT:
+			userBall->move(0.01);
+			break;
+		case GLUT_KEY_RIGHT:
+			userBall->move(-0.01);
+			break;
+		}
 }
 
 static void on_timer(int value)

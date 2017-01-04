@@ -16,10 +16,10 @@ float angle = 0;
 /* n je koliko polja vidimo u daljinu a m je koliko je detaljan put */ 
 void draw_road(int n,int m){
 	int i,j;
-	int length = 7;
+	int length = 4;
 	float width = (float)MAX_WIDTH/m; 
 	float x0 = -5, x1 = x0 + width;
-	float z0 = 0,z1 = z0-length;
+	float z0 = 5,z1 = z0-length;
 	float color=1;
 	
 
