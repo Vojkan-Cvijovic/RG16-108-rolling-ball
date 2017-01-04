@@ -62,7 +62,7 @@ void GameScene::run(){
     	angle = 0;
     draw_road(100,10);
     
-    userBall->draw();
+    userBall->draw(-2);
 
     k+=1;
     road_speed-=0.1;

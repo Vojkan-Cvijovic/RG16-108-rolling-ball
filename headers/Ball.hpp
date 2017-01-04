@@ -10,7 +10,7 @@ public:
 	~Ball();
 	void move(float m);
 	void jump();
-	void draw();
+	void draw(float surfaceLevel);
 	bool isMoving();
 private:
 	float size = 0.75;
@@ -19,9 +19,11 @@ private:
 	float rotationAngleX = 0;
 	float rotationAngleZ = 0;
 	bool isJumping = false;
-	float gravity = 1.2;
+	float gravity = 7;
 	float yVel = 0; // uses for jump
 	float xVel = 0; // uses for move
+	float jumpVel(float surfaceLevel);
+	float jumpTime = 0;
 };
 
 

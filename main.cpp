@@ -18,7 +18,7 @@ static void on_keyboard(unsigned char key, int x, int y);
 static void on_timer(int value);
 static void SpecialInput(int key, int x, int y);
 int timer = 0;
-
+float delta_t = 1.0/60;
 int main(int argc, char** argv){
 
 	/* Inicijalizuje se GLUT. */
@@ -85,6 +85,12 @@ static void on_keyboard(unsigned char key,int x, int y){
 		case 'p':
 			timer = 0;
 			break;
+		case 32:
+			std::cout << "Jump " << key << std::endl;
+			userBall->jump();
+			break;
+		default:
+			std::cout << "Unknown key " << key << std::endl;
 	}
 }
 static void SpecialInput(int key, int x, int y){
