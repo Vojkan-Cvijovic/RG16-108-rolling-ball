@@ -1,11 +1,11 @@
 PROGRAM   = main
 CC        = g++
-CFLAGS    = -g -Wall -std=c++11
+CFLAGS    = -std=c++11
 LDFLAGS   = -lGL -lGLU -lglut
 
-$(PROGRAM): main.o MenuWindow.o
+$(PROGRAM): main.o GameScene.o 
 	$(CC) -o $@ $^ $(LDFLAGS)
-MenuWindow.o: MenuWindow.cpp ./headers/MenuWindow.hpp
+GameScene.o : GameScene.cpp ./headers/GameScene.hpp
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 
