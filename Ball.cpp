@@ -4,7 +4,7 @@ extern float delta_t;
 
 void Ball::jump(){
 	if(isJumping == false){
-		yVel =  3;
+		yVel =  2;
 		isJumping = true;
 		jumpTime = 0;
 	}
@@ -25,7 +25,7 @@ bool Ball::isMoving(){
 }
 float Ball::jumpVel(float surfaceLevel){
 	if(isJumping){
-		float new_y = y + 4*delta_t*yVel;
+		float new_y = y + 9*delta_t*yVel;
 		yVel = yVel - delta_t*gravity;
 		std::cout << new_y << std::endl;
 		if(new_y < surfaceLevel){

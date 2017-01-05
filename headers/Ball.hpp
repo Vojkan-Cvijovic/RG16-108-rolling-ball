@@ -1,5 +1,5 @@
 #ifndef __BALL_HPP__
-#define __BALL_HPP__s
+#define __BALL_HPP__
 #include <GL/glut.h>
 #include <iostream>
 #include <cmath>

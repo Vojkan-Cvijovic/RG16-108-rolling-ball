@@ -1,12 +1,11 @@
  #include <GL/glut.h>
 #include "./headers/GameScene.hpp"
-#include "./headers/Ball.hpp"
 
 #define MENU_SCREEN_NUM 0
 #define GAME_SCREEN_NUM 1
 #define OPTIONS_SCREEN_NUM 2
 
-
+Road* userRoad;
 Ball* userBall;
 GameScene* gameScene;
 unsigned int width,height;
@@ -42,7 +41,7 @@ int main(int argc, char** argv){
 
 	gameScene = new GameScene();
 	userBall = new Ball();
-
+	userRoad = new Road(-5,0,100,10);
     /* Program ulazi u glavnu petlju. */
 	glutMainLoop();
 

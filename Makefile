@@ -2,14 +2,18 @@ PROGRAM   = main
 CC        = g++
 CFLAGS    = -std=c++11
 LDFLAGS   = -lGL -lGLU -lglut
-
-$(PROGRAM): main.o GameScene.o Ball.o
+DEST 	  = ./headers
+$(PROGRAM): main.o GameScene.o Ball.o Road.o Plate.o
 	$(CC) -o $@ $^ $(LDFLAGS)
-main.o : main.cpp ./headers/GameScene.hpp ./headers/Ball.hpp
+main.o : main.cpp $(DEST)/GameScene.hpp $(DEST)/Ball.hpp
 	$(CC) $(CFLAGS) -c -o $@ $<
-GameScene.o : GameScene.cpp ./headers/GameScene.hpp ./headers/Ball.hpp
+GameScene.o : GameScene.cpp $(DEST)/GameScene.hpp $(DEST)/Ball.hpp $(DEST)/Road.hpp
 	$(CC) $(CFLAGS) -c -o $@ $<
-Ball.o: Ball.cpp ./headers/Ball.hpp
+Ball.o: Ball.cpp $(DEST)/Ball.hpp
+	$(CC) $(CFLAGS) -c -o $@ $<
+Road.o: Road.cpp $(DEST)/Road.hpp $(DEST)/Plate.hpp
+	$(CC) $(CFLAGS) -c -o $@ $<
+Plate.o: Plate.cpp $(DEST)/Plate.hpp
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 .PHONY: clean dist

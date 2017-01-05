@@ -1,6 +1,8 @@
 #ifndef __GAMESCENE_HPP__
 #define __GAMESCENE_HPP__
 #include <GL/glut.h>
+#include "Ball.hpp"
+#include "Road.hpp"
 
 class GameScene
 {
