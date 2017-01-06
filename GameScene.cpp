@@ -26,6 +26,17 @@ void GameScene::run(){
     	speed = speed - SPEED_DECREASE;
     else
     	speed = speed + SPEED_DECREASE;
+
+    if(userBall->getPositionY() == ROAD_BASE_LEVEL && abs(userBall->getPositionX()) > ROAD_BASE_WIDTH/2)
+    	userBall->drop();
+
+    if(userBall->getPositionY() < GAME_OVER_FALL_LEVEL){
+    	cout << "GAME OVER" << endl;
+    	cout << "Your distance is : " << userRoad->getDistance() << endl;
+    	exit(0);
+    }
+
+
 }
 void GameScene::increaseSpeed(){
 	if(speed <= SPEED_LIMIT)

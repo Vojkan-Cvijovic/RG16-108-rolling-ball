@@ -4,6 +4,8 @@
 #include <iostream>
 #include <cmath>
 
+using namespace std;
+
 class Ball
 {
 public:
@@ -18,7 +20,7 @@ public:
 	float getPositionY(){ return y;}
 	void speedUp();
 	void slowDown();
-	void drop();
+	void drop(){fall = 1;}
 private:
 	float size = 0.75;
 	float weight = 1; // affects jump
@@ -30,7 +32,8 @@ private:
 	float yVel = 0; // uses for jump
 	float xVel = 0; // uses for move
 	float jumpVel(float surfaceLevel);
-	float jumpTime = 0;
+	void falling();
+	int fall = 0;
 };
 
 

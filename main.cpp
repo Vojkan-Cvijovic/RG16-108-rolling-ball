@@ -72,6 +72,10 @@ static void on_keyboard(unsigned char key,int x, int y){
 				timer = 1;
 			}
 			break;
+		case 'q':
+			userBall->drop();
+
+			break;
 		case 'p':
 			timer = 0;
 			break;

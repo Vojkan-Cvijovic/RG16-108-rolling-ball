@@ -7,6 +7,7 @@
 #define SPEED_LIMIT 5.0
 #define SPEED_DECREASE 0.02
 #define ACCELERATION 0.05
+#define GAME_OVER_FALL_LEVEL -10
 
 class GameScene
 {

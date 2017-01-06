@@ -5,6 +5,8 @@
 #include "Plate.hpp"
 #include <cmath>
 #define ROAD_BASE_SPEED 2.0
+#define ROAD_BASE_LEVEL -2
+#define ROAD_BASE_WIDTH 10
 
 #define PLATE_COUNT 5
 using namespace std;
@@ -16,7 +18,7 @@ public:
 	Road(float x, float y,int length,int density);
 	~Road();
 	void draw();
-	float getDistance(){return distance;}
+	float getDistance(){return distance + 4;}
 	void run(float speed);
 	void generate();
 private:
@@ -29,7 +31,6 @@ private:
 	float distance;
 	int reachedLevel;
 	float flyAwayDistance;
-	int allocated;
 	int capatacy;
 
 };

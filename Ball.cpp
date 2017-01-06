@@ -33,6 +33,10 @@ float Ball::jumpVel(float surfaceLevel){
 	}
 	return y;
 }
+void Ball::falling(){
+	y -= pow(weight,abs(y)/(gravity));
+	cout << "new y is " << y << endl;
+}
 void Ball::draw(float speed,float surfaceLevel){
 	if(!isMoving()) // steering
 		rotationAngleZ += xVel*1.2;
@@ -45,6 +49,8 @@ void Ball::draw(float speed,float surfaceLevel){
 
 	glColor3f(1,0,0);
     glPushMatrix();
+    	if(fall)
+    		falling();
     	glTranslatef(x, y, z);
     	glRotatef(rotationAngleX,-1,0,0);
     	glRotatef(rotationAngleZ,0,0,1);
