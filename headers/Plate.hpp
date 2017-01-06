@@ -14,12 +14,14 @@ class Plate
 public:
 	Plate(float x, float y, float length, float density)
 	: _x(x),_y(y),_length(length),_density(density)
-	, _r(0),_g(0),_b(0)
+	, _r(1),_g(0),_b(0)
 	{}
 	void paint(float r, float g, float b)
 	{
-		if(!_exists)
+		if(!_exists){
+			cout << _exists << endl;
 			return;
+		}
 		_r = r;
 		_g = g;
 		_b = b;
@@ -28,7 +30,9 @@ public:
 	void draw(int level);
 	bool ifExists(){return _exists;}
 	void generate(){_exists = true;}
+	bool toDraw(){return drawFlag;}
 private:
+	bool drawFlag;
 	bool _exists;
 	float _x,_y;
 	float _length;

@@ -26,12 +26,12 @@ void GameScene::run(){
     if(speed < ROAD_BASE_SPEED && userBall->onGround())
     	speed = speed + SPEED_DECREASE;
 
-    if(userRoad->fallThrough(userBall->getPositionX(),userBall->getPositionY()) ||
-   			(userBall->getPositionY() == ROAD_BASE_LEVEL && 
-   				abs(userBall->getPositionX()) > ROAD_BASE_WIDTH/2)){
-    	userBall->drop();
-    	speed = ROAD_BASE_SPEED;
-    }
+    // if(userRoad->fallThrough(userBall->getPositionX(),userBall->getPositionY()) ||
+   	// 		(userBall->getPositionY() == ROAD_BASE_LEVEL && 
+   	// 			abs(userBall->getPositionX()) > ROAD_BASE_WIDTH/2)){
+    // 	userBall->drop();
+    // 	speed = ROAD_BASE_SPEED;
+    // }
 
     if(userBall->getPositionY() < GAME_OVER_FALL_LEVEL ){
     	

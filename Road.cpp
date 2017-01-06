@@ -60,7 +60,11 @@ void Road::draw(){
 
 		for (int j = 0; j < PLATE_COUNT; ++j)
 		{
-			if(_surface[i][j] != NULL){
+			bool exists = _surface[i][j]->ifExists();
+			//cout << exists << endl;
+			if(!exists){}
+			else{
+			if(_surface[i][j] != NULL ){
 
 				float red = pow(sin(i/87.0),2)+j/20.0 + 0.1;
 				float green = pow(sin(i/64.0),2)+j/10.0 + 0.1;
@@ -76,7 +80,7 @@ void Road::draw(){
 				glPopMatrix();
 			}
 		}
-		
+		}
 	}
 }
 void Road::run(float speed){
@@ -181,7 +185,7 @@ bool Road::fallThrough(float x,int y){
 	//cout << "Distance : "<< distance + 1 << " | "<< d  <<endl;
 	if(d >= 0 &&
 		!_surface[d][j]->ifExists()){
-		//cout << "Fall "<< " | "<< !_surface[d][j]->ifExists() << endl;
+		cout << "Fall "<< " | "<< !_surface[d][j]->ifExists() << endl;
 		return true;
 	}
 	return false;
