@@ -22,6 +22,7 @@ public:
 	void speedUp();
 	void slowDown();
 	void drop(){fall = 1;}
+	bool onGround(){return !isJumping;}
 private:
 	float size = 0.75;
 	float weight = 1; // affects jump

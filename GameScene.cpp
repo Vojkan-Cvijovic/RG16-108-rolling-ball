@@ -3,9 +3,7 @@
 
 
 using namespace std;
-#define MAX_ROAD_LEFT -5
-#define MAX_ROAD_RIGHT 5
-#define MAX_WIDTH 10
+
 
 extern Ball* userBall;
 extern Road* userRoad;
@@ -22,7 +20,7 @@ void GameScene::run(){
 
     userBall->run(speed,-2	);
     //cout << "x " << userBall->getPositionX() << " | y " << userBall->getPositionY() << endl;
-    if(speed > ROAD_BASE_SPEED)
+    if(speed > ROAD_BASE_SPEED && userBall->onGround())
     	speed = speed - SPEED_DECREASE;
     else
     	speed = speed + SPEED_DECREASE;
@@ -34,18 +32,24 @@ void GameScene::run(){
     	cout << "-------------------" <<endl;
     	cout << "GAME OVER" << endl;
     	cout << "Your distance is : " << userRoad->getDistance() << endl;
-    	cout << "-------------------"
+    	cout << "-------------------" <<endl;
     	exit(0);
     }
-
-
+    
+    if(userRoad->getDistance() >= (TRACK_LENGTH * 4)-1){
+    	cout << "-------------------" <<endl;
+    	cout << "VICTORY " << endl;
+    	cout << "Your distance is : " << userRoad->getDistance() << endl;
+    	cout << "-------------------" <<endl;
+    	exit(0);
+    }
 }
 void GameScene::increaseSpeed(){
-	if(speed <= SPEED_LIMIT)
+	if(speed <= SPEED_LIMIT && userBall->onGround())
 		speed += ACCELERATION;
 }
 void GameScene::decreaseSpeed(){
-	if(speed > 1)
+	if(speed > 1 && userBall->onGround())
 		speed-= ACCELERATION;
 }
 void GameScene::moveLeft(){

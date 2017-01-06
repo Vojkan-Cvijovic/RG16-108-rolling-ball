@@ -2,13 +2,12 @@
 #include "./headers/GameScene.hpp"
 #include "./headers/GameSettings.hpp"
 
-
-
 Road* userRoad;
 Ball* userBall;
 GameScene* gameScene;
 unsigned int width,height;
 unsigned char gameState = 1; /* podrazumevano je da smo u menu screen-u */
+
 static void on_display();
 static void on_reshape(int x, int y);
 static void on_mouse();
@@ -17,6 +16,8 @@ static void on_timer(int value);
 static void SpecialInput(int key, int x, int y);
 int timer = 0;
 float delta_t = 1.0/60;
+
+
 int main(int argc, char** argv){
 
 	/* Inicijalizuje se GLUT. */
@@ -40,7 +41,7 @@ int main(int argc, char** argv){
 
 	gameScene = new GameScene();
 	userBall = new Ball();
-	userRoad = new Road(-5,0,100,10);
+	userRoad = new Road(-MAX_ROAD_WIDTH/2, 0, TRACK_LENGTH, DETAILS_LEVEL);
     /* Program ulazi u glavnu petlju. */
 	glutMainLoop();
 
@@ -130,7 +131,5 @@ static void on_display(){
 
     /* Nova slika se salje na ekran. */
     glutSwapBuffers();
-
-
 
 }

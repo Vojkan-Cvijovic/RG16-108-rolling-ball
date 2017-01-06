@@ -3,8 +3,7 @@
 #include <GL/glut.h>
 #include "GameSettings.hpp"
 
-#define PLATE_DEFAULT_WIDTH 2
-#define PLATE_BASE_LENGTH 3
+
 #include <cmath>
 #include <iostream>
 
@@ -13,12 +12,14 @@ using namespace std;
 class Plate
 {
 public:
-	Plate(float x, float y, float length, float density, bool exists)
-	: _x(x),_y(y),_length(length),_density(density),_exists(exists)
-	, _r(1),_g(1),_b(1)
+	Plate(float x, float y, float length, float density)
+	: _x(x),_y(y),_length(length),_density(density)
+	, _r(0),_g(0),_b(0)
 	{}
 	void paint(float r, float g, float b)
 	{
+		if(!_exists)
+			return;
 		_r = r;
 		_g = g;
 		_b = b;
@@ -26,6 +27,7 @@ public:
 	~Plate(){}
 	void draw(int level);
 	bool ifExists(){return _exists;}
+	void generate(){_exists = true;}
 private:
 	bool _exists;
 	float _x,_y;
