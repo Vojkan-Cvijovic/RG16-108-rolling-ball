@@ -1,0 +1,25 @@
+#ifndef __GAMESETTINGS_HPP_
+#define __GAMESETTINGS_HPP_
+
+#define ROAD_BASE_SPEED 2.0
+#define ROAD_BASE_LEVEL -2
+#define ROAD_BASE_WIDTH 10
+
+#define PLATE_DEFAULT_WIDTH 2
+#define PLATE_BASE_LENGTH 3
+#define PLATE_COUNT 5
+
+#define SPEED_LIMIT 5.0
+#define SPEED_DECREASE 0.02
+#define ACCELERATION 0.05
+#define GAME_OVER_FALL_LEVEL -10
+
+#define MENU_SCREEN_NUM 0
+#define GAME_SCREEN_NUM 1
+#define OPTIONS_SCREEN_NUM 2
+
+#define VIEW_ANGLE 60
+#define FUSTRUM_NEAR 1
+#define FUSTRUM_FAR 100
+
+#endif

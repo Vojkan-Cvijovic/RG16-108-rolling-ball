@@ -35,7 +35,6 @@ float Ball::jumpVel(float surfaceLevel){
 }
 void Ball::falling(){
 	y -= pow(weight,abs(y)/(gravity));
-	cout << "new y is " << y << endl;
 }
 void Ball::draw(float speed,float surfaceLevel){
 	if(!isMoving()) // steering

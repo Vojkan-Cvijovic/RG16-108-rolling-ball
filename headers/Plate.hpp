@@ -1,6 +1,8 @@
 #ifndef __PLATE_HPP__ 
 #define __PLATE_HPP__
 #include <GL/glut.h>
+#include "GameSettings.hpp"
+
 #define PLATE_DEFAULT_WIDTH 2
 #define PLATE_BASE_LENGTH 3
 #include <cmath>

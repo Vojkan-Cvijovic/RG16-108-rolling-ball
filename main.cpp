@@ -1,9 +1,8 @@
  #include <GL/glut.h>
 #include "./headers/GameScene.hpp"
+#include "./headers/GameSettings.hpp"
 
-#define MENU_SCREEN_NUM 0
-#define GAME_SCREEN_NUM 1
-#define OPTIONS_SCREEN_NUM 2
+
 
 Road* userRoad;
 Ball* userBall;
@@ -57,7 +56,7 @@ static void on_reshape(int x,int y){
 	/* Podesava se projekcija */
 	glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(60, (float) width / height, 1, 120);
+    gluPerspective(VIEW_ANGLE, (float) width / height, FUSTRUM_NEAR, FUSTRUM_FAR);
 }
 static void on_keyboard(unsigned char key,int x, int y){
 	/* U zavisnosti u kom je stanju igrica imamo razlicite komanda

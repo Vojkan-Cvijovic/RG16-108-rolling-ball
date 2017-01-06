@@ -1,6 +1,7 @@
 #ifndef __BALL_HPP__
 #define __BALL_HPP__
 #include <GL/glut.h>
+#include "GameSettings.hpp"
 #include <iostream>
 #include <cmath>
 

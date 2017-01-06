@@ -3,6 +3,7 @@
 #include <GL/glut.h>
 #include "Ball.hpp"
 #include "Road.hpp"
+#include "GameSettings.hpp"
 
 #define SPEED_LIMIT 5.0
 #define SPEED_DECREASE 0.02

@@ -31,8 +31,10 @@ void GameScene::run(){
     	userBall->drop();
 
     if(userBall->getPositionY() < GAME_OVER_FALL_LEVEL){
+    	cout << "-------------------" <<endl;
     	cout << "GAME OVER" << endl;
     	cout << "Your distance is : " << userRoad->getDistance() << endl;
+    	cout << "-------------------"
     	exit(0);
     }
 
