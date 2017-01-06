@@ -9,7 +9,6 @@
 
 using namespace std;
 
-
 class Road
 {
 public:
@@ -19,6 +18,7 @@ public:
 	float getDistance(){return distance + 4;}
 	void run(float speed);
 	void generate(int i, int j);
+	bool fallThrough(float x,int y);
 private:
 	Road(const Road& r);
 	Road& operator=(const Road& z);

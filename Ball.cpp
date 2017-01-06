@@ -11,8 +11,9 @@ void Ball::jump(){
 }
 void Ball::move(float speed){
 	if(isJumping)
-		return;
-	xVel = 7*speed;
+		xVel = 3*speed;
+	else
+		xVel = 7*speed;
 
 }
 bool Ball::isMoving(){
@@ -34,7 +35,7 @@ float Ball::jumpVel(float surfaceLevel){
 	return y;
 }
 void Ball::falling(){
-	y -= pow(weight,abs(y)/(gravity));
+	y -= pow(-y,abs(y)/(gravity))/gravity;
 }
 void Ball::draw(float speed,float surfaceLevel){
 	if(!isMoving()) // steering

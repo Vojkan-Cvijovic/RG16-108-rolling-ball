@@ -1,7 +1,4 @@
 #include "./headers/Plate.hpp"
-#include <iostream>
-
-using namespace std;
 
 void Plate::draw(int level){
 	if(_exists){		

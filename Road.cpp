@@ -81,9 +81,9 @@ void Road::draw(){
 }
 void Road::run(float speed){
 	draw();
-	distance = distance + 1/30.0 * speed;
+	distance = distance + 1/5.0* speed;
 
-	
+	level = ceil(distance + 1);
 }
 void Road::generate(int i,int j){
 
@@ -152,4 +152,38 @@ void Road::generate(int i,int j){
 	}
 
 	generate(i,j+1);
+}
+bool Road::fallThrough(float x,int y){
+	int j;
+	int center = 2;
+	float correction = 1.8;
+	x = x+ center;
+	
+	// we need to determine line
+	if(x>4.8)
+		j=4;
+	else if(x>3)
+		j=3;
+	else if(x>1)
+		j=2;
+	else if(x>-0.8)
+		j=1;
+	else 
+		j=0;
+
+	
+	int d= round((distance + 1)/ PLATE_BASE_LENGTH);
+
+	if(y != ROAD_BASE_LEVEL)
+		return false;
+	// 1.6
+
+	//cout << "Distance : "<< distance + 1 << " | "<< d  <<endl;
+	if(d >= 0 &&
+		!_surface[d][j]->ifExists()){
+		//cout << "Fall "<< " | "<< !_surface[d][j]->ifExists() << endl;
+		return true;
+	}
+	return false;
+
 }
