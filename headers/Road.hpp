@@ -3,6 +3,8 @@
 #include <iostream>
 #include <vector>
 #include "Plate.hpp"
+#include <cmath>
+#define ROAD_BASE_SPEED 2.0
 
 #define PLATE_COUNT 5
 using namespace std;
@@ -14,13 +16,22 @@ public:
 	Road(float x, float y,int length,int density);
 	~Road();
 	void draw();
+	float getDistance(){return distance;}
+	void run(float speed);
+	void generate();
 private:
-Road(const Road& r);
-Road& operator=(const Road& z);
-Plate*** _surface; 
-int _length;
-float _x,_y;
-int level; // how much of area is generated
+	Road(const Road& r);
+	Road& operator=(const Road& z);
+	Plate*** _surface;
+	int _length;
+	float _x,_y;
+	int level; // how much of area is generated
+	float distance;
+	int reachedLevel;
+	float flyAwayDistance;
+	int allocated;
+	int capatacy;
+
 };
 
 

@@ -4,17 +4,27 @@
 #include "Ball.hpp"
 #include "Road.hpp"
 
+#define SPEED_LIMIT 5.0
+#define SPEED_DECREASE 0.02
+#define ACCELERATION 0.05
+
 class GameScene
 {
 public:
-	GameScene(){} // ovde dodajemo naziv igraca i tezinu igrice i ...
+	GameScene(){
+		speed = ROAD_BASE_SPEED;
+	} 
 	~GameScene();
 	void run();
-	void increaseSpeed(){ speed += 0.1;}
-	void decreaseSpeed(){ speed -= 0.1;}
-	void restartSpeed(){ speed =2;}
+	void increaseSpeed();
+	void decreaseSpeed();
+	void restartSpeed();
+	void moveLeft();
+	void moveRight();
 private:
-	float speed = 2;	
+	float speed;
+
+
 };
 
 #endif 

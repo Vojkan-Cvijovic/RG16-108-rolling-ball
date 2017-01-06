@@ -57,7 +57,7 @@ static void on_reshape(int x,int y){
 	/* Podesava se projekcija */
 	glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(60, (float) width / height, 1, 500);
+    gluPerspective(60, (float) width / height, 1, 120);
 }
 static void on_keyboard(unsigned char key,int x, int y){
 	/* U zavisnosti u kom je stanju igrica imamo razlicite komanda
@@ -65,15 +65,6 @@ static void on_keyboard(unsigned char key,int x, int y){
 	switch(key){
 		case 27:
 			exit(0); 
-			break;
-		case 'i':
-			gameScene->increaseSpeed();
-			break;
-		case 'o':
-			gameScene->decreaseSpeed();
-			break;
-		case 'r':
-			gameScene->restartSpeed();
 			break;
 		case 's':
 			if(!timer){
@@ -96,10 +87,16 @@ static void SpecialInput(int key, int x, int y){
 
 	switch(key){
 		case GLUT_KEY_LEFT:
-			userBall->move(0.01);
+			gameScene->moveLeft();
 			break;
 		case GLUT_KEY_RIGHT:
-			userBall->move(-0.01);
+			gameScene->moveRight();
+			break;
+		case GLUT_KEY_UP:
+			gameScene->increaseSpeed();
+			break;
+		case GLUT_KEY_DOWN:
+			gameScene->decreaseSpeed();
 			break;
 		}
 }

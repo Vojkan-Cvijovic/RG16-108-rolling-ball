@@ -1,7 +1,7 @@
 #include "./headers/Road.hpp"
 
 Road::Road(float x, float y,int length,int density)
-	:_x(x),_y(y),_length(length)
+	:_x(x),_y(y),_length(length),distance(-3),level(0)
 	{
 		int width = PLATE_COUNT * PLATE_DEFAULT_WIDTH;
 		_surface = (Plate***) malloc(_length * sizeof(Plate *));
@@ -16,7 +16,7 @@ Road::Road(float x, float y,int length,int density)
 				exit(0);
 			}
 			for(int j=0;j<PLATE_COUNT;j++){
-				_surface[i][j] = new Plate(x + j*PLATE_DEFAULT_WIDTH,y,4,density,true);
+				_surface[i][j] = new Plate(x + j*PLATE_DEFAULT_WIDTH,y,PLATE_BASE_LENGTH,density,true);
 				if(_surface[i][j] == NULL){
 					cout << "Error while allocating plate" << endl;
 				}
@@ -34,14 +34,35 @@ Road::~Road(){
 	}
 	free (_surface);
 }
+
 void Road::draw(){
 	for (int i = 0; i < _length; ++i)
 	{
 		for (int j = 0; j < PLATE_COUNT; ++j)
 		{
-			_surface[i][j]->paint(i+10+j*j % 255, 10+i+j % 255 ,j*10+i % 255);
-			_surface[i][j]->draw(i);
+			if(_surface[i][j] != NULL){
 
+				float red = pow(sin(i/87.0),2)+j/20.0 + 0.1;
+				float green = pow(sin(i/64.0),2)+j/10.0 + 0.1;
+				float blue = pow(sin(i/49.0),2)+j/30.0 + 0.1;
+
+				//cout << "RGB  " << red << " | " << green << " | " << blue << " Za i="<<i<< " & j =" << j << endl;
+
+				glPushMatrix();
+					glTranslatef(0,-3,distance);
+					_surface[i][j]->paint(red,green,blue);
+					_surface[i][j]->draw(i);
+				glPopMatrix();
+			}
 		}
 	}
+}
+void Road::run(float speed){
+	draw();
+	distance = distance + 1/30.0 * speed;
+
+	
+}
+void Road::generate(){
+
 }

@@ -2,6 +2,7 @@
 #define __PLATE_HPP__
 #include <GL/glut.h>
 #define PLATE_DEFAULT_WIDTH 2
+#define PLATE_BASE_LENGTH 3
 #include <cmath>
 #include <iostream>
 
@@ -16,10 +17,9 @@ public:
 	{}
 	void paint(float r, float g, float b)
 	{
-		_r = r/200;
-		_g = g/200;
-		_b = b/200;
-		cout << " rgb " << _r << " " << _g << " " << _b << endl;
+		_r = r;
+		_g = g;
+		_b = b;
 	}
 	~Plate(){}
 	void draw(int level);
