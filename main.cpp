@@ -40,8 +40,8 @@ int main(int argc, char** argv){
     /* Obavlja se OpenGL inicijalizacija. */
 	glClearColor(0,0,0,0);
 	glEnable(GL_DEPTH_TEST);
-	//glEnable(GL_NORMALIZE);
-	//glEnable(GL_LIGHTING);
+	glEnable(GL_NORMALIZE);
+	glEnable(GL_LIGHTING);
 
 
 	gameScene = new GameScene();

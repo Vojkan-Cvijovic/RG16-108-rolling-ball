@@ -7,9 +7,23 @@ Lamppost::Lamppost(int i){
 		_side = LEFT_SIDE;
 	_d = (i + 1) * LAMPPOST_FREQUENCY * PLATE_BASE_LENGTH;
 }
+void Lamppost::paint(int pole){
 
+	if(pole){
+		glMaterialfv(GL_FRONT, GL_AMBIENT, _ambient_coeffs);
+    	glMaterialfv(GL_FRONT, GL_DIFFUSE, _diffuse_coeffs);
+  	}else{
+  		glMaterialfv(GL_FRONT, GL_AMBIENT, _ambient_coeffs_bolb);
+    	glMaterialfv(GL_FRONT, GL_DIFFUSE, _diffuse_coeffs_bolb);
+  	}
+
+  	glMaterialfv(GL_FRONT, GL_SPECULAR, _specular_coeffs);
+    glMaterialf(GL_FRONT, GL_SHININESS, _shininess);
+}
 void Lamppost::draw(float distance){
+
 	
+
 	glPushMatrix();
 		glColor3f(0.8,0.8,0.8);
 		glTranslatef(0,0,distance);
@@ -18,6 +32,7 @@ void Lamppost::draw(float distance){
 		glRotatef(_side*180,0,1,0);
 		// pole
 		glPushMatrix();
+			paint(1);
 			glTranslatef(0,1,0);
 			glScalef(1,30,1);
 			
@@ -25,6 +40,7 @@ void Lamppost::draw(float distance){
 		glPopMatrix();
 		// neck
 		glPushMatrix();
+			paint(1);
 			glTranslatef(0.4,4,0);
 			glScalef(5,1,1);
 	
@@ -33,6 +49,7 @@ void Lamppost::draw(float distance){
 		
 		// base
 		glPushMatrix();
+			paint(1);
 			glTranslatef(0,-2,0);
 			glScalef(4,1,4);
 		
@@ -40,6 +57,7 @@ void Lamppost::draw(float distance){
 		glPopMatrix();
 		// head
 		glPushMatrix();
+			paint(0);
 			glColor3f(1,1,0.3);
 			glTranslatef(1.3,4,0);
 			glScalef(4,1,3);

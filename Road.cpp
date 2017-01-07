@@ -143,17 +143,18 @@ void Road::generate(int i,int j){
 		if(_surface[i-1][j]->ifExists())
 			odds += 50;
 		if( j>0 && _surface[i-1][j-1]->ifExists())
-			odds += 5;
+			odds += 6;
 		if( j<PLATE_COUNT-1 && _surface[i-1][j+1]->ifExists())
-			odds += 5;
+			odds += 6;
 		if( j<PLATE_COUNT-1 && _surface[i][j+1]->ifExists())
 			odds += 7;
 		if( j>0 && _surface[i][j-1]->ifExists())
 			odds += 7;
-		if(i>= 181)
+		if(i>= 50)
 			odds += 20;
 		// generate random number
 		int randomNum = dis(gen);
+		cout << " @ "<< i << " | "<< j << " odds " << odds << endl;
 		if(randomNum <= odds - hendicap)
 			_surface[i][j]->generate();
 	}
