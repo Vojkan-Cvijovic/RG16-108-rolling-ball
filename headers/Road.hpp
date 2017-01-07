@@ -4,6 +4,8 @@
 #include <vector>
 #include "Plate.hpp"
 #include "GameSettings.hpp"
+#include "Lamppost.hpp"
+
 #include <cmath>
 #include <random>
 
@@ -23,6 +25,7 @@ private:
 	Road(const Road& r);
 	Road& operator=(const Road& z);
 	Plate*** _surface;
+	Lamppost** _streetLights;
 	int _length;
 	float _x,_y;
 	int level; // how much of area is generated
@@ -30,6 +33,7 @@ private:
 	int reachedLevel;
 	float flyAwayDistance;
 	int capatacy;
+	int _lamppostCount;
 
 };
 

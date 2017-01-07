@@ -14,6 +14,8 @@ uniform_int_distribution<> dis(0, 100);
 Road::Road(float x, float y,int length,int density)
 	:_x(x),_y(y),_length(length),distance(-3),level(0)
 	{
+
+		_lamppostCount = _length/LAMPPOST_FREQUENCY+1;
 		int width = PLATE_COUNT * PLATE_DEFAULT_WIDTH;
 		_surface = (Plate***) malloc(_length * sizeof(Plate *));
 		if(_surface == NULL){
@@ -36,6 +38,19 @@ Road::Road(float x, float y,int length,int density)
 		}
 		generate(0,0);
 
+		_streetLights = (Lamppost**) malloc( _lamppostCount * sizeof(Lamppost*));
+		if(_streetLights == NULL){
+			cout << "Error while allocating streetLights" << endl;
+			exit(0);
+		}
+		for (int i = 0; i < _lamppostCount; ++i)
+		{
+			_streetLights[i] = new Lamppost(i);
+			if(_streetLights[i] == NULL){
+				cout << "Error while allocating single street light" << endl;
+				exit(0);
+			}
+		}
 	}
 Road::~Road(){
 	for (int i = 0; i < _length; ++i)
@@ -80,12 +95,11 @@ void Road::draw(){
 				glPopMatrix();
 			}
 			}
-
-		if( i == 10){
-			
-		}
-
-		}
+		}	
+	}
+	for (int i = 0; i < _lamppostCount; ++i)
+	{
+		_streetLights[i]->draw(distance);
 	}
 }
 void Road::run(float speed){
