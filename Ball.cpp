@@ -47,7 +47,12 @@ void Ball::draw(float speed,float surfaceLevel){
 
 	float rotationSpeed = 5*speed;
 
-	glColor3f(1,0,0);
+	glMaterialfv(GL_FRONT, GL_AMBIENT, _ambient_coeffs);
+ 	glMaterialfv(GL_FRONT, GL_DIFFUSE, _diffuse_coeffs);
+   	glMaterialfv(GL_FRONT, GL_SPECULAR, _specular_coeffs);
+   	glMaterialf(GL_FRONT, GL_SHININESS, _shininess);
+
+
     glPushMatrix();
     	if(fall)
     		falling();
@@ -55,8 +60,8 @@ void Ball::draw(float speed,float surfaceLevel){
     	glRotatef(rotationAngleX,-1,0,0);
     	glRotatef(rotationAngleZ,0,0,1);
 		/* Kreira se objekat. */
-    	glColor3f(1, 0, 0);
-    	glutWireSphere(size,10,10);
+    	
+    	glutSolidSphere(size,40,40);
     glPopMatrix();
     rotationAngleX += 5*rotationSpeed;
     if(rotationAngleX >= 360)

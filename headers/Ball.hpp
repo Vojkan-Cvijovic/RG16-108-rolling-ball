@@ -36,6 +36,17 @@ private:
 	float jumpVel(float surfaceLevel);
 	void falling();
 	int fall = 0;
+	/* Koeficijenti ambijentalne refleksije materijala. */
+    GLfloat _ambient_coeffs[4] = { 0.1, 0.1, 0.1, 1 };
+
+    /* Koeficijenti difuzne refleksije materijala. */
+    GLfloat _diffuse_coeffs[4] = { 0.9, 0.1, 0.1, 1 };
+
+    /* Koeficijenti spekularne refleksije materijala. */
+    GLfloat _specular_coeffs[4] = { 0.9, 0.9, 0.9, 1 };
+
+    /* Koeficijent glatkosti materijala. */
+    GLfloat _shininess = 60;
 };
 
 

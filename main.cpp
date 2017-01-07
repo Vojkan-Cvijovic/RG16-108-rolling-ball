@@ -2,6 +2,8 @@
 #include "./headers/GameScene.hpp"
 #include "./headers/GameSettings.hpp"
 
+
+
 Road* userRoad;
 Ball* userBall;
 GameScene* gameScene;
@@ -38,6 +40,9 @@ int main(int argc, char** argv){
     /* Obavlja se OpenGL inicijalizacija. */
 	glClearColor(0,0,0,0);
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_NORMALIZE);
+	glEnable(GL_LIGHTING);
+
 
 	gameScene = new GameScene();
 	userBall = new Ball();

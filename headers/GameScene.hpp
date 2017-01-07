@@ -6,7 +6,6 @@
 #include "GameSettings.hpp"
 
 
-
 class GameScene
 {
 public:
