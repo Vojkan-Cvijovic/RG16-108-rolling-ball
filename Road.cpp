@@ -85,8 +85,6 @@ void Road::draw(){
 				float green = pow(sin(i/64.0),2)+j/10.0 + 0.1;
 				float blue = pow(sin(i/49.0),2)+j/30.0 + 0.1;
 
-				//cout << "RGB  " << red << " | " << green << " | " << blue << " Za i="<<i<< " & j =" << j << endl;
-
 				glPushMatrix();
 					glTranslatef(0,-3,distance);
 					if(i <= _length - 5 || i >= _length - 2)

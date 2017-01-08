@@ -54,8 +54,6 @@ void GameScene::run(){
     // cout << "Speed : " << speed << endl;;
      userRoad->run(speed);
 
-    // drawSquare();
-
 
      userBall->run(speed, ROAD_BASE_LEVEL);
     
