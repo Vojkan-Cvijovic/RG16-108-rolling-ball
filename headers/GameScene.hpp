@@ -23,7 +23,7 @@ private:
 	float speed;
 	void gameOver();
 	void speedModify();
-
+	void addFog();
 
 };
 

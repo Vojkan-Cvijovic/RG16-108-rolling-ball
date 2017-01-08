@@ -43,8 +43,6 @@ int main(int argc, char** argv){
 	glEnable(GL_NORMALIZE);
 	glEnable(GL_LIGHTING);
 
-	cout << "MAX " << GL_MAX_LIGHTS << " " <<  GL_LIGHT0 << endl;
-
 	gameScene = new GameScene();
 	userBall = new Ball();
 	userRoad = new Road(-MAX_ROAD_WIDTH/2, 0, TRACK_LENGTH, DETAILS_LEVEL);
@@ -86,7 +84,6 @@ static void on_keyboard(unsigned char key,int x, int y){
 			timer = 0;
 			break;
 		case 32:
-			std::cout << "Jump " << key << std::endl;
 			userBall->jump();
 			break;
 		default:

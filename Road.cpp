@@ -150,11 +150,9 @@ void Road::generate(int i,int j){
 			odds += 7;
 		if(i>= 50)
 			odds += 20;
-		// generate random number
 		
 		int randomNum =0;
 		//int randomNum = dis(gen);
-		cout << " @ "<< i << " | "<< j << " odds " << odds << endl;
 		if(randomNum <= odds - hendicap)
 			_surface[i][j]->generate();
 	}
@@ -200,12 +198,9 @@ bool Road::fallThrough(float x,int y){
 
 	if(y != ROAD_BASE_LEVEL)
 		return false;
-	// 1.6
 
-	//cout << "Distance : "<< distance + 1 << " | "<< d  <<endl;
 	if(d >= 0 &&
 		!_surface[d][j]->ifExists()){
-		cout << "Fall "<< " | "<< !_surface[d][j]->ifExists() << endl;
 		return true;
 	}
 	return false;

@@ -36,7 +36,12 @@ void light(){
     glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
 
 }
-
+void GameScene::addFog(){
+	glEnable(GL_FOG);
+	GLfloat fogColor[] = {0,0,0,1};
+	glFogi(GL_FOG_MODE,GL_EXP2);
+	glFogf(GL_FOG_DENSITY,0.02f);
+}
 void GameScene::run(){
 
 	/* Podesava se vidna tacka. */
@@ -46,7 +51,7 @@ void GameScene::run(){
 
 
     glShadeModel (GL_SMOOTH);
-
+    addFog();
     light();
     // if(speed >= SPEED_LIMIT)
     // 	speed = SPEED_LIMIT;
@@ -56,8 +61,6 @@ void GameScene::run(){
 
 
      userBall->run(speed, ROAD_BASE_LEVEL);
-    
-    // //cout << "x " << userBall->getPositionX() << " | y " << userBall->getPositionY() << endl;
     
      speedModify();
      //gameOver();
