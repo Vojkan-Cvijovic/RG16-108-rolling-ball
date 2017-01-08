@@ -21,6 +21,8 @@ public:
 	void moveRight();
 private:
 	float speed;
+	void gameOver();
+	void speedModify();
 
 
 };

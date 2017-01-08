@@ -15,7 +15,7 @@ Road::Road(float x, float y,int length,int density)
 	:_x(x),_y(y),_length(length),distance(-3),level(0)
 	{
 
-		_lamppostCount = _length/LAMPPOST_FREQUENCY+1;
+		_lamppostCount = _length/LAMPPOST_FREQUENCY;
 		int width = PLATE_COUNT * PLATE_DEFAULT_WIDTH;
 		_surface = (Plate***) malloc(_length * sizeof(Plate *));
 		if(_surface == NULL){
@@ -153,7 +153,9 @@ void Road::generate(int i,int j){
 		if(i>= 50)
 			odds += 20;
 		// generate random number
-		int randomNum = dis(gen);
+		
+		int randomNum =0;
+		//int randomNum = dis(gen);
 		cout << " @ "<< i << " | "<< j << " odds " << odds << endl;
 		if(randomNum <= odds - hendicap)
 			_surface[i][j]->generate();

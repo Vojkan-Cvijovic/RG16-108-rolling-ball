@@ -43,6 +43,7 @@ int main(int argc, char** argv){
 	glEnable(GL_NORMALIZE);
 	glEnable(GL_LIGHTING);
 
+	cout << "MAX " << GL_MAX_LIGHTS << " " <<  GL_LIGHT0 << endl;
 
 	gameScene = new GameScene();
 	userBall = new Ball();

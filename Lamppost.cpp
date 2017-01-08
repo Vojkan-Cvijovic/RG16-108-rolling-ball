@@ -6,6 +6,7 @@ Lamppost::Lamppost(int i){
 	else
 		_side = LEFT_SIDE;
 	_d = (i + 1) * LAMPPOST_FREQUENCY * PLATE_BASE_LENGTH;
+	_bolb = new Light(-_d,i);
 }
 void Lamppost::paint(int pole){
 
@@ -17,25 +18,24 @@ void Lamppost::paint(int pole){
     	glMaterialfv(GL_FRONT, GL_DIFFUSE, _diffuse_coeffs_bolb);
   	}
 
-  	glMaterialfv(GL_FRONT, GL_SPECULAR, _specular_coeffs);
+  	//glMaterialfv(GL_FRONT, GL_SPECULAR, _specular_coeffs);
     glMaterialf(GL_FRONT, GL_SHININESS, _shininess);
 }
 void Lamppost::draw(float distance){
 
-	
+	_bolb->draw(distance);
 
 	glPushMatrix();
 		glColor3f(0.8,0.8,0.8);
 		glTranslatef(0,0,distance);
-		glTranslatef((ROAD_BASE_WIDTH-0.2)*_side,0,0);		
-		glTranslatef(-ROAD_BASE_WIDTH/2 + 0.5,-1.0,-_d);
+		glTranslatef((ROAD_BASE_WIDTH + 1)*_side,0,0);		
+		glTranslatef(-ROAD_BASE_WIDTH/2 - 0.5,-1.0,-_d);
 		glRotatef(_side*180,0,1,0);
 		// pole
 		glPushMatrix();
 			paint(1);
 			glTranslatef(0,1,0);
 			glScalef(1,30,1);
-			
 			glutSolidCube(0.2);
 		glPopMatrix();
 		// neck
@@ -43,7 +43,6 @@ void Lamppost::draw(float distance){
 			paint(1);
 			glTranslatef(0.4,4,0);
 			glScalef(5,1,1);
-	
 			glutSolidCube(0.2);
 		glPopMatrix();
 		
@@ -52,7 +51,6 @@ void Lamppost::draw(float distance){
 			paint(1);
 			glTranslatef(0,-2,0);
 			glScalef(4,1,4);
-		
 			glutSolidCube(0.2);
 		glPopMatrix();
 		// head

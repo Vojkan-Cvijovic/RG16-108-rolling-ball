@@ -42,7 +42,7 @@ private:
 
     GLfloat _ambient_coeffs[4] = { 0.1, 0.1, 0.1, 1 };
     GLfloat _diffuse_coeffs[4] = { 0.7, 0.7, 0.7, 1 };
-    GLfloat _specular_coeffs[4] = { 1, 1, 1, 1 };
+    GLfloat _specular_coeffs[4] = { 0.9, 0.9, 0.9, 1 };
     GLfloat _shininess = 60;
 
 };
