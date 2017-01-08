@@ -16,6 +16,9 @@ static void on_mouse();
 static void on_keyboard(unsigned char key, int x, int y);
 static void on_timer(int value);
 static void SpecialInput(int key, int x, int y);
+static void on_mouse(int button, int state, int x, int y);
+static void on_motion(int x, int y);
+
 int timer = 0;
 float delta_t = 1.0/60;
 
@@ -35,6 +38,8 @@ int main(int argc, char** argv){
 	glutKeyboardFunc(on_keyboard);
 	glutDisplayFunc(on_display);
 	glutReshapeFunc(on_reshape);
+	glutMotionFunc(on_motion);
+	glutMouseFunc(on_mouse);
 	glutSpecialFunc(SpecialInput);
 
     /* Obavlja se OpenGL inicijalizacija. */
@@ -135,4 +140,9 @@ static void on_display(){
     /* Nova slika se salje na ekran. */
     glutSwapBuffers();
 
+}
+static void on_motion(int x, int y){}
+
+static void on_mouse(int button, int state, int x, int y){
+	cout << " X: " << x << " | y: " << y <<endl;
 }

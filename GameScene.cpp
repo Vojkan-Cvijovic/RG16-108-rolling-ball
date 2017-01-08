@@ -21,7 +21,7 @@ void drawSquare(){
 
 void light(){
 	
-    GLfloat light_position[] = { 0, 1, -1, 1 };
+    GLfloat light_position[] = { 0, 0, -1, 1 };
 
     GLfloat light_ambient[] = { 0.1, 0.1, 0.1, 1 };
 
@@ -44,26 +44,27 @@ void GameScene::addFog(){
 }
 void GameScene::run(){
 
+	
 	/* Podesava se vidna tacka. */
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     gluLookAt(0, 0, 5, 0, 0, 0, 0, 1, 0);
 
-
     glShadeModel (GL_SMOOTH);
     addFog();
     light();
-    // if(speed >= SPEED_LIMIT)
-    // 	speed = SPEED_LIMIT;
+     if(speed >= SPEED_LIMIT)
+     	speed = SPEED_LIMIT;
 
-    // cout << "Speed : " << speed << endl;;
      userRoad->run(speed);
 
 
      userBall->run(speed, ROAD_BASE_LEVEL);
     
      speedModify();
-     //gameOver();
+     gameOver();
+     print_score_value();
+    print_speed_value();         
 }
 
 void GameScene::increaseSpeed(){
@@ -113,3 +114,24 @@ void GameScene::gameOver(){
     }
    
 }
+void GameScene::print_score_value(){
+    
+   /* Rezultat prebacujemo u bafer koji cemo ispisivati. */
+   char buff[15];
+   snprintf(buff, 10, "Score: %d",(int) userRoad->getDistance()-1);
+   glColor3f(1, 1.0, 0.0);
+   glRasterPos3f(-6, 4, -5);
+   glutBitmapString((void*) GLUT_BITMAP_TIMES_ROMAN_24, (const unsigned char*) buff);
+
+}
+void GameScene::print_speed_value(){
+    
+   /* Rezultat prebacujemo u bafer koji cemo ispisivati. */
+   char buff[20];
+   snprintf(buff, 10, "Speed: %d", (int) speed);
+   glColor3f(1, 1.0, 0);
+   glRasterPos3f(4, 4, -5);
+   glutBitmapString((void*) GLUT_BITMAP_TIMES_ROMAN_24, (const unsigned char*) buff);
+
+}
+

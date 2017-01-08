@@ -2,7 +2,7 @@
 #define __GAMESETTINGS_HPP_
 
 #define DIFFICULTY 1	
-#define ROAD_BASE_SPEED 1.0
+#define ROAD_BASE_SPEED 2.0
 #define ROAD_BASE_LEVEL -2
 #define ROAD_BASE_WIDTH 10
 #define ROAD_BASE_LENGTH 100

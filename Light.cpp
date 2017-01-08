@@ -17,7 +17,7 @@ void Light::draw(float distance){
 		glLightfv(_lightId,GL_AMBIENT, _light_ambient);
 		glLightfv(_lightId,GL_DIFFUSE, _light_diffuse);
 		glLightfv(_lightId,GL_SPECULAR, _light_specular);
-	}else if ( _light_position[2] > -FUSTRUM_NEAR +10 && _enabled == true){
+	}else if ( _light_position[2] > -FUSTRUM_NEAR +25 && _enabled == true){
 		/*
 			if light passes behind our back + 10 then we need to turn it off
 			but only one time

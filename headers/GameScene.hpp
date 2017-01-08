@@ -4,7 +4,7 @@
 #include "Ball.hpp"
 #include "Road.hpp"
 #include "GameSettings.hpp"
-
+#include <GL/freeglut.h>
 
 class GameScene
 {
@@ -24,7 +24,8 @@ private:
 	void gameOver();
 	void speedModify();
 	void addFog();
-
+	void print_score_value();
+	void print_speed_value();
 };
 
 #endif 
