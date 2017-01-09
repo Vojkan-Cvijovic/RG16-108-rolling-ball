@@ -63,8 +63,8 @@ void GameScene::run(){
     
      speedModify();
      gameOver();
-     print_score_value();
-    print_speed_value();         
+     //print_score_value();
+    //print_speed_value();         
 }
 
 void GameScene::increaseSpeed(){
@@ -118,7 +118,7 @@ void GameScene::print_score_value(){
     
    /* Rezultat prebacujemo u bafer koji cemo ispisivati. */
    char buff[15];
-   snprintf(buff, 10, "Score: %d",(int) userRoad->getDistance()-1);
+   snprintf(buff, 10, "Score:%d",(int) userRoad->getDistance()-1);
    glColor3f(1, 1.0, 0.0);
    glRasterPos3f(-6, 4, -5);
    glutBitmapString((void*) GLUT_BITMAP_TIMES_ROMAN_24, (const unsigned char*) buff);

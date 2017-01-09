@@ -34,6 +34,8 @@ private:
 	float flyAwayDistance;
 	int capatacy;
 	int _lamppostCount;
+	int _currentLevel;
+	int _n;
 
 };
 

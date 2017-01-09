@@ -20,7 +20,7 @@ void Plate::draw(int level){
 					float x0 = _x + i*single_strip_width, z0 =  level * _length;
 					float x1 = _x + (i+1)*single_strip_width, z1 = (level+1) * _length;
 					float y0 = _y,y1 = _y; // incline ??
-					glNormal3f(1,0,0);
+					glNormal3f(0,1,0);
 					glVertex3f(x0, y0, -z0);
 					glVertex3f(x0, y0, -z1);
 					glVertex3f(x1, y1, -z1);

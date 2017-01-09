@@ -14,7 +14,8 @@ uniform_int_distribution<> dis(0, 100);
 Road::Road(float x, float y,int length,int density)
 	:_x(x),_y(y),_length(length),distance(-3),level(0)
 	{
-
+		_currentLevel = 0;
+		_n = FUSTRUM_FAR/PLATE_BASE_LENGTH;
 		_lamppostCount = _length/LAMPPOST_FREQUENCY;
 		int width = PLATE_COUNT * PLATE_DEFAULT_WIDTH;
 		_surface = (Plate***) malloc(_length * sizeof(Plate *));
@@ -65,18 +66,27 @@ Road::~Road(){
 }
 
 void Road::draw(){
-	int d = distance;
-	int limit = FUSTRUM_FAR + d/4 + 4;
-	if(limit>_length)
-		limit = _length;
 
-	for (int i = 0; i < limit; ++i)
+	//_n += _currentLevel;
+	int pom = distance/PLATE_BASE_LENGTH;
+	_n+= pom - _currentLevel;
+
+	_currentLevel = distance/PLATE_BASE_LENGTH;
+
+	if(_currentLevel<0)
+		_currentLevel = 0;
+
+	cout << "Distance "<< distance << endl;
+
+	if(_currentLevel + (_n - _currentLevel) >= _length)
+		_n = _length;
+	cout << "Drawing form " << _currentLevel << " to " << _n << endl;
+	for (int i = _currentLevel; i < _n ; ++i)
 	{ 
-
 		for (int j = 0; j < PLATE_COUNT; ++j)
 		{
 			bool exists = _surface[i][j]->ifExists();
-			//cout << exists << endl;
+
 			if(!exists){}
 			else{
 			if(_surface[i][j] != NULL ){

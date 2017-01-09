@@ -1,8 +1,10 @@
  #include <GL/glut.h>
 #include "./headers/GameScene.hpp"
 #include "./headers/GameSettings.hpp"
+#include <time.h>
 
-
+long frames = 0;
+clock_t this_time ;
 
 Road* userRoad;
 Ball* userBall;
@@ -126,6 +128,9 @@ static void on_timer(int value)
 
 static void on_display(){
 	/* Moramo da znamo u kom smo prozoru da bi znali sta da prikazemo*/
+
+
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	switch(gameState){
 		case MENU_SCREEN_NUM:
