@@ -1,16 +1,19 @@
- #include <GL/glut.h>
+#include <GL/glut.h>
 #include "./headers/GameScene.hpp"
 #include "./headers/GameSettings.hpp"
+#include "./headers/MenuScene.hpp"
 #include <time.h>
 
-long frames = 0;
-clock_t this_time ;
+
 
 Road* userRoad;
 Ball* userBall;
 GameScene* gameScene;
-unsigned int width,height;
-unsigned char gameState = 1; /* podrazumevano je da smo u menu screen-u */
+MenuScene* menuScene;
+
+unsigned int width = WINDOW_WIDTH_PIXELS;
+unsigned int height = WINDOW_HEIGHT_PIXELS;
+unsigned char gameState = 0; /* podrazumevano je da smo u menu screen-u */
 
 static void on_display();
 static void on_reshape(int x, int y);
@@ -20,6 +23,7 @@ static void on_timer(int value);
 static void SpecialInput(int key, int x, int y);
 static void on_mouse(int button, int state, int x, int y);
 static void on_motion(int x, int y);
+static void initialize();
 
 int timer = 0;
 float delta_t = 1.0/60;
@@ -32,7 +36,7 @@ int main(int argc, char** argv){
 	glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH | GLUT_DOUBLE);
 
     /* Kreira se prozor. */
-	glutInitWindowSize(720,540);
+	glutInitWindowSize(width,height);
 	glutInitWindowPosition(100,100);
 	glutCreateWindow("Rolling ball");
 
@@ -44,24 +48,40 @@ int main(int argc, char** argv){
 	glutMouseFunc(on_mouse);
 	glutSpecialFunc(SpecialInput);
 
-    /* Obavlja se OpenGL inicijalizacija. */
-	glClearColor(0,0,0,0);
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_NORMALIZE);
-	glEnable(GL_LIGHTING);
+	
+	initialize();
 
-	gameScene = new GameScene();
-	userBall = new Ball();
-	userRoad = new Road(-MAX_ROAD_WIDTH/2, 0, TRACK_LENGTH, DETAILS_LEVEL);
     /* Program ulazi u glavnu petlju. */
 	glutMainLoop();
 
     return 0;
 }
+
+static void initialize(void)
+{
+   	glClearColor(0, 0, 0, 0);
+
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_TEXTURE_2D);
+
+    
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    gameScene = new GameScene();
+	userBall = new Ball();
+	userRoad = new Road(-MAX_ROAD_WIDTH/2, 0, TRACK_LENGTH, DETAILS_LEVEL);
+	menuScene = new MenuScene();
+}
+
+
+
 static void on_reshape(int x,int y){
 
 	width = x;
 	height = y;
+	menuScene->setWidthAndHeight(x,y);
 
 	glViewport(0, 0, width, height);
 
@@ -125,20 +145,18 @@ static void on_timer(int value)
 	if(timer)
 		glutTimerFunc(50,on_timer,0);
 }
-
 static void on_display(){
 	/* Moramo da znamo u kom smo prozoru da bi znali sta da prikazemo*/
-
-
-
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	switch(gameState){
 		case MENU_SCREEN_NUM:
+			menuScene->draw();
 			break;
 		case GAME_SCREEN_NUM:
 			gameScene->run();
 			break;
 		case OPTIONS_SCREEN_NUM:
+			menuScene->drawOptionScreen();
 			break;
 	}
 
@@ -149,5 +167,5 @@ static void on_display(){
 static void on_motion(int x, int y){}
 
 static void on_mouse(int button, int state, int x, int y){
-	cout << " X: " << x << " | y: " << y <<endl;
+	menuScene->on_mouse(button,state,x,y);
 }

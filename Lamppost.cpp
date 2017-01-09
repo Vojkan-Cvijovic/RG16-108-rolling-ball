@@ -18,7 +18,7 @@ void Lamppost::paint(int pole){
     	glMaterialfv(GL_FRONT, GL_DIFFUSE, _diffuse_coeffs_bolb);
   	}
 
-  	//glMaterialfv(GL_FRONT, GL_SPECULAR, _specular_coeffs);
+  	glMaterialfv(GL_FRONT, GL_SPECULAR, _specular_coeffs);
     glMaterialf(GL_FRONT, GL_SHININESS, _shininess);
 }
 void Lamppost::draw(float distance){

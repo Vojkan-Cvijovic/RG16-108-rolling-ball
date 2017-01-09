@@ -1,6 +1,9 @@
 #ifndef __GAMESETTINGS_HPP_
 #define __GAMESETTINGS_HPP_
 
+#define WINDOW_WIDTH_PIXELS 720
+#define WINDOW_HEIGHT_PIXELS 540
+
 #define DIFFICULTY 1	
 #define ROAD_BASE_SPEED 2.0
 #define ROAD_BASE_LEVEL -2
@@ -33,5 +36,7 @@
 #define TRACK_LENGTH (ROAD_BASE_LENGTH + FUSTRUM_LENGTH * DIFFICULTY)
 
 #define LAMPPOST_FREQUENCY 5
+#define FILENAME0 "./resources/road.bmp"
+#define FILENAME1 "./resources/wall.bmp"
 
 #endif

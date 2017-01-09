@@ -80,7 +80,6 @@ void Road::draw(){
 
 	if(_currentLevel + (_n - _currentLevel) >= _length)
 		_n = _length;
-	cout << "Drawing form " << _currentLevel << " to " << _n << endl;
 	for (int i = _currentLevel; i < _n ; ++i)
 	{ 
 		for (int j = 0; j < PLATE_COUNT; ++j)
@@ -91,9 +90,9 @@ void Road::draw(){
 			else{
 			if(_surface[i][j] != NULL ){
 
-				float red = pow(sin(i/87.0),2)+j/20.0 + 0.1;
-				float green = pow(sin(i/64.0),2)+j/10.0 + 0.1;
-				float blue = pow(sin(i/49.0),2)+j/30.0 + 0.1;
+				float red = pow(sin(i/87.0 + 1.5),2)+ 0.1;
+				float green = pow(sin(i/64.0 + 0.5),2) + 0.1;
+				float blue = pow(sin(i/49.0),2) + 0.1;
 
 				glPushMatrix();
 					glTranslatef(0,-3,distance);
