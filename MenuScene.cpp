@@ -62,7 +62,7 @@ int active_texture(){
 
 void MenuScene::draw(){
 	glPushMatrix();
-	 glEnable(GL_TEXTURE_2D);
+	glEnable(GL_TEXTURE_2D);
 
 	_window_width = glutGet(GLUT_WINDOW_WIDTH);
 	_window_height = glutGet(GLUT_WINDOW_HEIGHT);
@@ -169,6 +169,7 @@ void MenuScene::push_button(int button_id){
 }
 void MenuScene::release_button(int button_id){
 	if(_selected == true){
+		cout << "Changing to " << _selected_button_id + 1 << endl;
 		change_game_state(_selected_button_id+1);
 		_selected_button_id = -1;
 		_selected = false;

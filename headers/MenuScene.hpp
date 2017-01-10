@@ -24,12 +24,12 @@ private:
 	MenuScene(const MenuScene&);
 	MenuScene& operator=(const MenuScene&);
 	Image* _image;
-	GLuint _names[TEXTURE_NUM_COUNT];
-	void draw_text(char* text,float x,float y);
+	GLuint _names[SCREEN_TEXTURE_NUM_COUNT];
 	int _selected_button_id = -1;
 	bool _selected = false;
 	int _button_width,_button_height;
 	int _window_width,_window_height;
+	void draw_text(char* text,float x,float y);
 	void release_button(int button_id);
 	void push_button(int button_id);
 	int resolve_button_id(int mouse_x, int mouse_y);

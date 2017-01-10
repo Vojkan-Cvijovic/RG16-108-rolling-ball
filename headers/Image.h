@@ -1,3 +1,5 @@
+#ifndef _IMAGE_H_
+#define _IMAGE_H_
 /*
  * Dve strukture koje opisuju strukturu dva zaglavlja
  * kojima pocinje svaka slika u bmp formatu.
@@ -45,4 +47,4 @@ void image_done(Image *image);
  * image.
  */
 void image_read(Image *image, char *filename);
-
+#endif

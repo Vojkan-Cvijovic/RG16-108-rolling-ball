@@ -40,6 +40,14 @@
 #define FILENAME2 "./resources/background.bmp"
 #define FILENAME0 "./resources/button_off.bmp"
 #define FILENAME1 "./resources/button_on.bmp"
-#define TEXTURE_NUM_COUNT 3
+#define FILENAME3 "./resources/options_background.bmp"
+#define SCREEN_TEXTURE_NUM_COUNT 3
+
+#define DIFFICULTY_OPTION_NUM_0 0;
+#define DIFFICULTY_OPTION_NUM_1 1;
+#define DIFFICULTY_OPTION_NUM_2 2;
+
+#define DAYTIME_OPTION_DAY 0;
+#define DAYTIME_OPTION_NIGHT 0;
 
 #endif

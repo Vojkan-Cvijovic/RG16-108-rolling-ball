@@ -2,6 +2,7 @@
 #include "./headers/GameScene.hpp"
 #include "./headers/GameSettings.hpp"
 #include "./headers/MenuScene.hpp"
+#include "./headers/OptionsScene.hpp"
 #include <time.h>
 
 
@@ -10,6 +11,7 @@ Road* userRoad = nullptr;
 Ball* userBall = nullptr;
 GameScene* gameScene = nullptr;
 MenuScene* menuScene = nullptr;
+OptionsScene* userOptionsScene = nullptr;
 
 unsigned int width = WINDOW_WIDTH_PIXELS;
 unsigned int height = WINDOW_HEIGHT_PIXELS;
@@ -67,16 +69,15 @@ static void initialize(void)
 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
-    glEnable(GL_TEXTURE_2D);
-
     
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
+
     userBall = new Ball();
     userRoad = new Road(-MAX_ROAD_WIDTH/2, 0, TRACK_LENGTH, DETAILS_LEVEL);
-    gameScene = new GameScene();
-	
+    gameScene = new GameScene();	
 	menuScene = new MenuScene();
+	userOptionsScene = new OptionsScene();
 }
 
 
@@ -179,7 +180,8 @@ static void on_display(){
 			gameScene->run();
 			break;
 		case OPTIONS_SCREEN_NUM:
-			menuScene->drawOptionScreen();
+			cout << "Rendering options screen" << endl;
+			userOptionsScene->draw();
 			break;
 		case QUIT_MENU_NUM:
 			cout << "Exiting menu " << endl;
@@ -189,10 +191,12 @@ static void on_display(){
 
     /* Nova slika se salje na ekran. */
     glutSwapBuffers();
-
 }
 static void on_motion(int x, int y){}
 
 static void on_mouse(int button, int state, int x, int y){
-	menuScene->on_mouse(button,state,x,y);
+	if(screenState == MENU_SCREEN_NUM)
+		menuScene->on_mouse(button,state,x,y);
+	else if(screenState == OPTIONS_SCREEN_NUM)
+		userOptionsScene->on_mouse(button,state,x,y);
 }
