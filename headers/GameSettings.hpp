@@ -37,6 +37,6 @@
 
 #define LAMPPOST_FREQUENCY 5
 #define FILENAME0 "./resources/road.bmp"
-#define FILENAME1 "./resources/wall.bmp"
+#define FILENAME1 "./resources/background.bmp"
 
 #endif
