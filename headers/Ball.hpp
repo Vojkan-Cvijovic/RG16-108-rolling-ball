@@ -11,7 +11,7 @@ class Ball
 {
 public:
 	Ball(){}
-	~Ball();
+	~Ball(){}
 	void move(float m);
 	void jump();
 	void draw(float speed,float surfaceLevel);

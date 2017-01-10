@@ -6,14 +6,14 @@
 
 
 
-Road* userRoad;
-Ball* userBall;
-GameScene* gameScene;
-MenuScene* menuScene;
+Road* userRoad = nullptr;
+Ball* userBall = nullptr;
+GameScene* gameScene = nullptr;
+MenuScene* menuScene = nullptr;
 
 unsigned int width = WINDOW_WIDTH_PIXELS;
 unsigned int height = WINDOW_HEIGHT_PIXELS;
-unsigned char gameState = 0; /* podrazumevano je da smo u menu screen-u */
+unsigned int screenState = 0; /* podrazumevano je da smo u menu screen-u */
 
 static void on_display();
 static void on_reshape(int x, int y);
@@ -24,7 +24,10 @@ static void SpecialInput(int key, int x, int y);
 static void on_mouse(int button, int state, int x, int y);
 static void on_motion(int x, int y);
 static void initialize();
+static void menu_finish(){
 
+	exit(0);
+}
 int timer = 0;
 float delta_t = 1.0/60;
 
@@ -48,6 +51,7 @@ int main(int argc, char** argv){
 	glutMouseFunc(on_mouse);
 	glutSpecialFunc(SpecialInput);
 
+	screenState = 0;
 	
 	initialize();
 
@@ -68,10 +72,10 @@ static void initialize(void)
     
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-
+    userBall = new Ball();
+    userRoad = new Road(-MAX_ROAD_WIDTH/2, 0, TRACK_LENGTH, DETAILS_LEVEL);
     gameScene = new GameScene();
-	userBall = new Ball();
-	userRoad = new Road(-MAX_ROAD_WIDTH/2, 0, TRACK_LENGTH, DETAILS_LEVEL);
+	
 	menuScene = new MenuScene();
 }
 
@@ -81,7 +85,6 @@ static void on_reshape(int x,int y){
 
 	width = x;
 	height = y;
-	menuScene->setWidthAndHeight(x,y);
 
 	glViewport(0, 0, width, height);
 
@@ -91,11 +94,20 @@ static void on_reshape(int x,int y){
     gluPerspective(VIEW_ANGLE, (float) width / height, FUSTRUM_NEAR, FUSTRUM_FAR);
 }
 static void on_keyboard(unsigned char key,int x, int y){
-	/* U zavisnosti u kom je stanju igrica imamo razlicite komanda
-	npr strelice ce biti aktivne dok u meniju nece */
 	switch(key){
 		case 27:
-			exit(0); 
+			/*
+				we need to know from where did we came
+			*/
+			if(screenState == MENU_SCREEN_NUM)
+				menu_finish();
+			if(screenState == OPTIONS_SCREEN_NUM){
+				screenState = MENU_SCREEN_NUM;
+				break;
+			}
+			//delete userBall;
+			//delete userRoad;
+			screenState = MENU_SCREEN_NUM;
 			break;
 		case 's':
 			if(!timer){
@@ -148,15 +160,30 @@ static void on_timer(int value)
 static void on_display(){
 	/* Moramo da znamo u kom smo prozoru da bi znali sta da prikazemo*/
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	switch(gameState){
+	cout << "State is "  << screenState << endl;
+	switch(screenState){
 		case MENU_SCREEN_NUM:
+			cout << "Rendering game menu " << endl ;
 			menuScene->draw();
 			break;
 		case GAME_SCREEN_NUM:
+			// if(userBall == nullptr){
+			// 	cout << "Loading ball" << endl;
+			// 	userBall = new Ball();
+			// }
+			// if(userRoad == nullptr){
+			// 	cout << "Loading road" << endl;
+			// 	userRoad = new Road(-MAX_ROAD_WIDTH/2, 0, TRACK_LENGTH, DETAILS_LEVEL);
+			// }
+			cout << "Starting game ... " << endl; 
 			gameScene->run();
 			break;
 		case OPTIONS_SCREEN_NUM:
 			menuScene->drawOptionScreen();
+			break;
+		case QUIT_MENU_NUM:
+			cout << "Exiting menu " << endl;
+			menu_finish();
 			break;
 	}
 

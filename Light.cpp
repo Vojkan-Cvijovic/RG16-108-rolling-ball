@@ -20,15 +20,15 @@ void Light::draw(float distance){
 		glLightf(_lightId, GL_SPOT_CUTOFF, _light_cutoff);
 		glLightf(_lightId,GL_SPOT_EXPONENT, _light_exponent);
 
-		glPushMatrix();
-			glColor3f(1,0,0);
-			glBegin(GL_LINES);
-				glVertex3f(_light_position[0],_light_position[1],_light_position[2]);
-				glVertex3f( _light_position[0]+_light_direction[0]*10,
-							_light_position[1]+_light_direction[1]*10,
-							_light_position[2]+_light_direction[2]*10);
-			glEnd();
-		glPopMatrix();
+		// glPushMatrix();
+		// 	glColor3f(1,0,0);
+		// 	glBegin(GL_LINES);
+		// 		glVertex3f(_light_position[0],_light_position[1],_light_position[2]);
+		// 		glVertex3f( _light_position[0]+_light_direction[0]*10,
+		// 					_light_position[1]+_light_direction[1]*10,
+		// 					_light_position[2]+_light_direction[2]*10);
+		// 	glEnd();
+		// glPopMatrix();
 
 	}else if ( _light_position[2] > -FUSTRUM_NEAR +25 && _enabled == true){
 		/*

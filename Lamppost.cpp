@@ -26,7 +26,7 @@ void Lamppost::draw(float distance){
 	_bolb->draw(distance);
 
 	glPushMatrix();
-		glColor3f(0.8,0.8,0.8);
+		//glColor3f(0.8,0.8,0.8);
 		glTranslatef(0,0,distance);
 		glTranslatef((ROAD_BASE_WIDTH + 1)*_side,0,0);		
 		glTranslatef(-ROAD_BASE_WIDTH/2 - 0.5,-1.0,-_d);

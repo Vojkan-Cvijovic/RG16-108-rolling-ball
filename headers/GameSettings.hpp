@@ -22,6 +22,7 @@
 #define MENU_SCREEN_NUM 0
 #define GAME_SCREEN_NUM 1
 #define OPTIONS_SCREEN_NUM 2
+#define QUIT_MENU_NUM 3
 
 #define VIEW_ANGLE 60
 #define FUSTRUM_NEAR 1
@@ -36,7 +37,9 @@
 #define TRACK_LENGTH (ROAD_BASE_LENGTH + FUSTRUM_LENGTH * DIFFICULTY)
 
 #define LAMPPOST_FREQUENCY 5
-#define FILENAME0 "./resources/road.bmp"
-#define FILENAME1 "./resources/background.bmp"
+#define FILENAME2 "./resources/background.bmp"
+#define FILENAME0 "./resources/button_off.bmp"
+#define FILENAME1 "./resources/button_on.bmp"
+#define TEXTURE_NUM_COUNT 3
 
 #endif

@@ -13,6 +13,7 @@ public:
 	Light(float z,int i)
 	:_z(z)
 	{
+		cout << "Loading lights ... " << endl;
 		_light_position[0] = _x;
 		_light_position[1] = _y;
 		int position = i%7 + 1;

@@ -37,8 +37,10 @@ Road::Road(float x, float y,int length,int density)
 
 			}
 		}
+		cout << "Generating holes ... " <<endl;
 		generate(0,0);
 
+		cout << "Loading street lights ... " << endl;
 		_streetLights = (Lamppost**) malloc( _lamppostCount * sizeof(Lamppost*));
 		if(_streetLights == NULL){
 			cout << "Error while allocating streetLights" << endl;
@@ -75,8 +77,6 @@ void Road::draw(){
 
 	if(_currentLevel<0)
 		_currentLevel = 0;
-
-	cout << "Distance "<< distance << endl;
 
 	if(_currentLevel + (_n - _currentLevel) >= _length)
 		_n = _length;
@@ -116,6 +116,7 @@ void Road::run(float speed){
 	level = ceil(distance + 1);
 }
 void Road::generate(int i,int j){
+	
 
 	/*
 		

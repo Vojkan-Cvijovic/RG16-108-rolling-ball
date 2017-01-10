@@ -12,7 +12,7 @@ public:
 	GameScene(){
 		speed = ROAD_BASE_SPEED;
 	} 
-	~GameScene();
+	~GameScene(){}
 	void run();
 	void increaseSpeed();
 	void decreaseSpeed();
