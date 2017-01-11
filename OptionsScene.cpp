@@ -125,7 +125,7 @@ void OptionsScene::draw(){
 	x = _window_width/3;
 	y = y - 3*_button_height/2;
 
-	draw_text("Time of day",x+_button_height/2,y);
+	draw_text("Time of day",x + _button_height,y);
 
 	y-=_button_height;
 
