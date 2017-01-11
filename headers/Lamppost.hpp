@@ -13,9 +13,13 @@ public:
 	Lamppost(int i);
 	~Lamppost();
 	void draw(float distance);
+	void setDaytime(int daytime){
+		_daytime = daytime;
+	}
 private:
 	float _d;
 	int _side;
+	int _daytime = 0;
 	void paint(int pole);
 	Light* _bolb;
 

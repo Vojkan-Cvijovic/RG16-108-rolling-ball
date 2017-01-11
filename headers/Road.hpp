@@ -14,13 +14,17 @@ using namespace std;
 class Road
 {
 public:
-	Road(float x, float y,int length,int density);
+	Road(float x, float y,int length,int density,int difficulty);
 	~Road();
 	void draw();
 	float getDistance(){return distance + 4;}
 	void run(float speed);
 	void generate(int i, int j);
 	bool fallThrough(float x,int y);
+	void setDifficultyAndDaytime(int difficulty,int daytime){
+		_difficulty = difficulty;
+		_daytime = daytime;
+	}
 private:
 	Road(const Road& r);
 	Road& operator=(const Road& z);
@@ -36,7 +40,8 @@ private:
 	int _lamppostCount;
 	int _currentLevel;
 	int _n;
-
+	int _difficulty = 1;
+	int _daytime;
 };
 
 

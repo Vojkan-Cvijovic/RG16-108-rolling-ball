@@ -11,8 +11,8 @@ mt19937 gen(rd());
 // uniformly distributed in range (1, 100)
 uniform_int_distribution<> dis(0, 100);
 
-Road::Road(float x, float y,int length,int density)
-	:_x(x),_y(y),_length(length),distance(-3),level(0)
+Road::Road(float x, float y,int length,int density, int difficulty)
+	:_x(x),_y(y),_length(length),distance(-3),level(0),_difficulty(difficulty)
 	{
 		_currentLevel = 0;
 		_n = FUSTRUM_FAR/PLATE_BASE_LENGTH;
@@ -53,6 +53,7 @@ Road::Road(float x, float y,int length,int density)
 				cout << "Error while allocating single street light" << endl;
 				exit(0);
 			}
+			
 		}
 	}
 Road::~Road(){
@@ -106,6 +107,7 @@ void Road::draw(){
 	}
 	for (int i = 0; i < _lamppostCount; ++i)
 	{
+		_streetLights[i]->setDaytime(_daytime);
 		_streetLights[i]->draw(distance);
 	}
 }
@@ -136,6 +138,9 @@ void Road::generate(int i,int j){
 
 	*/
 	int hendicap = (i%70)/10;
+	//cout << "difficulty " << _difficulty << endl;
+	int difficulty = 30/_difficulty - 10;
+	
 
 	if(i>=_length-1)
 		return;
@@ -161,8 +166,7 @@ void Road::generate(int i,int j){
 		if(i>= 50)
 			odds += 20;
 		
-		int randomNum =0;
-		//int randomNum = dis(gen);
+		int randomNum = dis(gen) - difficulty;
 		if(randomNum <= odds - hendicap)
 			_surface[i][j]->generate();
 	}

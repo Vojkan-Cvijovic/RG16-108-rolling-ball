@@ -23,8 +23,9 @@ void Lamppost::paint(int pole){
 }
 void Lamppost::draw(float distance){
 
-	_bolb->draw(distance);
-
+	if(_daytime == 1){
+		_bolb->draw(distance);
+	}
 	glPushMatrix();
 		//glColor3f(0.8,0.8,0.8);
 		glTranslatef(0,0,distance);

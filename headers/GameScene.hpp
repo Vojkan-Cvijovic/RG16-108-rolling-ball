@@ -6,6 +6,9 @@
 #include "GameSettings.hpp"
 #include <GL/freeglut.h>
 
+extern Ball* userBall;
+extern Road* userRoad;
+
 class GameScene
 {
 public:
@@ -19,8 +22,17 @@ public:
 	void restartSpeed();
 	void moveLeft();
 	void moveRight();
+	void setDifficulty(int d){
+		_difficulty = d;
+	}
+	void dayTime(int d){
+		_daytime = d;
+	}
 private:
+	int _difficulty = 1;
+	int _daytime = 0;
 	float speed;
+	void light();
 	void gameOver();
 	void speedModify();
 	void addFog();

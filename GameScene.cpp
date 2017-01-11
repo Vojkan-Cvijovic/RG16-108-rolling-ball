@@ -4,14 +4,24 @@
 using namespace std;
 
 
-extern Ball* userBall;
-extern Road* userRoad;
 
 
-void light(){
-	
-    GLfloat light_position[] = { 0, 0, -1, 1 };
 
+void GameScene::light(){
+	    //
+    GLfloat light_position[4] = {0,0,0,1}; 
+    if(_daytime == 0){
+      light_position[0] = 1;
+      light_position[1] = 1;
+      light_position[2] = 1;
+      light_position[3] = 0;
+    }
+    else{
+      light_position[0] = 0;
+      light_position[1] = 0;
+      light_position[2] = -1;
+      light_position[3] = 1;  
+    }
     GLfloat light_ambient[] = { 0.1, 0.1, 0.1, 1 };
 
     GLfloat light_diffuse[] = { 0.7, 0.7, 0.7, 1 };
@@ -32,9 +42,11 @@ void GameScene::addFog(){
 	glFogf(GL_FOG_DENSITY,0.02f);
 }
 void GameScene::run(){
-
+    glEnable(GL_LIGHTING);
+    userRoad->setDifficultyAndDaytime(_difficulty,_daytime);
     glPushMatrix();
-	  cout << "GameScene is running" << endl;
+    
+	  //cout << "GameScene is running" << endl;
 	/* Podesava se vidna tacka. */
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -56,6 +68,7 @@ void GameScene::run(){
      //print_score_value();
     //print_speed_value();  
     cout << "Distance : "<< userRoad->getDistance() << endl;
+    cout << "Speed: " << speed << endl;
     glPopMatrix();       
 }
 

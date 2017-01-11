@@ -62,6 +62,7 @@ int active_texture(){
 
 void MenuScene::draw(){
 	glPushMatrix();
+	glDisable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
 
 	_window_width = glutGet(GLUT_WINDOW_WIDTH);

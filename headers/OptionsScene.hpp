@@ -7,6 +7,8 @@
 #include "Image.h"
 using namespace std;
 
+extern unsigned int screenState;
+extern GameScene* gameScene;
 
 class OptionsScene
 {
@@ -16,12 +18,13 @@ public:
 		free(_image);
 	}
 	void draw();
-	void on_mouse(int button, int state, int x, int y);	
+	void on_mouse(int button, int state, int x, int y);
+	int get_difficulty_option(){return _difficulty_option;}
 private:
 	OptionsScene(const OptionsScene&);
 	OptionsScene& operator=(const OptionsScene&);
 	int _difficulty_option;
-	int _day_time;
+	int _day_time = 4;
 	Image* _image;
 	GLuint _names[SCREEN_TEXTURE_NUM_COUNT];
 	int _window_width,_window_height;
@@ -31,6 +34,8 @@ private:
 	void push_button(int button_id);
 	int resolve_button_id(int mouse_x, int mouse_y);
 	void draw_button_text(int x, int y, int button_id);
+	bool _back_option;
+	bool _selected = false;
 };
 
 
