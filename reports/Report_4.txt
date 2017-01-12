@@ -1,0 +1,11 @@
+What is done?
+    - Street lights bug fix
+    - Creating new screen, menu screen
+    - Adding buttons to menu screen with text
+    - Setting background in menu screen
+    - Adding drawing optimizations to game, drawing only what is in sight
+    
+What is in planning?
+    - Options screen
+    - Buttons functionality
+    

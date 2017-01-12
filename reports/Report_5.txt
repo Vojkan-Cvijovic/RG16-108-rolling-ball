@@ -1,0 +1,8 @@
+What is done?
+    - New screen, Options screen
+    - Adding functiionality to buttons, screen switching is now possible
+    - Three levels of difficulty and day/night mode
+    - Dinamic difficulty/time change
+    - Game instructions
+    
+First release.

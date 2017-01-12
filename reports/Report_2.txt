@@ -1,0 +1,12 @@
+What is done?
+    - Ball can speed up or slow down
+    - Ball can fall over edge now
+    - Holes are now part of road
+    - Removed holes from drawing
+    - Ball can fall into hole
+    - Adding gravity, falling and jumping seams more naturaly
+
+What is in planning?
+    - Adding light to game
+    - Fog
+    - Maybe texture

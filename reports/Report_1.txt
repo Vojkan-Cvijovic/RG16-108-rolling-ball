@@ -1,0 +1,10 @@
+What is done?
+    - Ball, with rotation and movement on road
+    - Road
+    - Ball can move left/right with proper left/right rotation
+    - Added ball jumping without moving left or right
+
+What is planning?
+    - Holes on road
+    - Ball falling
+    - Steering

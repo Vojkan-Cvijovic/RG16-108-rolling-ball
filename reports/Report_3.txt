@@ -1,0 +1,10 @@
+What is done?
+    - Adding headlight
+    - Adding lamp posts
+    - Adding lights on lamp posts
+    - Fog in now added to scene
+    - Displaying score and distance, huge impact on performance
+    
+What is in planning?
+    - Texture, finnaly
+    - Different game screens
