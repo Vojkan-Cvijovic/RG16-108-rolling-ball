@@ -18,8 +18,8 @@ public:
 	}
 private:
 	float _d;
-	int _side;
-	int _daytime = 0;
+	int _side; 	// left or right side of road
+	int _daytime = 0; 	// should light be turned on
 	void paint(int pole);
 	Light* _bolb;
 

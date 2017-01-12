@@ -33,13 +33,13 @@ private:
 	int _length;
 	float _x,_y;
 	int level; // how much of area is generated
-	float distance;
+	float distance; 
 	int reachedLevel;
 	float flyAwayDistance;
 	int capatacy;
 	int _lamppostCount;
 	int _currentLevel;
-	int _n;
+	int _n;	// number of generated road plates
 	int _difficulty = 1;
 	int _daytime;
 };

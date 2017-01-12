@@ -5,8 +5,11 @@ OptionsScene::OptionsScene(){
 	_difficulty_option = DIFFICULTY_OPTION_NUM_1;
 	_day_time = 4;
 
+	// setting default values
 	gameScene->setDifficulty(_difficulty_option);
 	gameScene->dayTime(_day_time%2);
+
+	// loading textures
 
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 	_image = image_init(0, 0);
@@ -15,7 +18,7 @@ OptionsScene::OptionsScene(){
 
     glGenTextures(3, _names);
 
-
+    // regular button
     image_read(_image, FILENAME0);
 
     glBindTexture(GL_TEXTURE_2D, _names[0]);
@@ -27,7 +30,7 @@ OptionsScene::OptionsScene(){
                  _image->width, _image->height, 0,
                  GL_RGB, GL_UNSIGNED_BYTE, _image->pixels);
 
-
+    // pressed button
     image_read(_image, FILENAME1);
 
     glBindTexture(GL_TEXTURE_2D, _names[1]);
@@ -39,7 +42,7 @@ OptionsScene::OptionsScene(){
                  _image->width, _image->height, 0,
                  GL_RGB, GL_UNSIGNED_BYTE, _image->pixels);
 
-
+    // background
     image_read(_image, FILENAME3);
 
     glBindTexture(GL_TEXTURE_2D, _names[2]);
@@ -51,16 +54,16 @@ OptionsScene::OptionsScene(){
                  _image->width, _image->height, 0,
                  GL_RGB, GL_UNSIGNED_BYTE, _image->pixels);
 
-    /* Iskljucujemo aktivnu teksturu */
     glBindTexture(GL_TEXTURE_2D, 0);
 
-    /* Unistava se objekat za citanje tekstura iz fajla. */
     image_done(_image);
 
 
 }
 
 void OptionsScene::draw(){
+
+	// drawing options screen
 
 	glPushMatrix();
 
@@ -71,7 +74,6 @@ void OptionsScene::draw(){
     
     glLoadIdentity();
     gluOrtho2D(0,_window_width,0,_window_height);
-
     
     _button_width = _window_width/4;
     _button_height = _window_height/11;
@@ -86,12 +88,18 @@ void OptionsScene::draw(){
 
 	y-=_button_height;
 	int j=1;
+
+	/* drawing difficulty option buttons */
+
     glPushMatrix();
     	for (int i = 0; i < 3; ++i,j++)
     	{
     		glBindTexture(GL_TEXTURE_2D,0);
 
     		draw_button_text(x,y,j-1);
+
+    		/* since only one difficulty option can be selected
+    		only one dufficulty button will have selected textre */
 
     		if(_difficulty_option == j){
     			glBindTexture(GL_TEXTURE_2D,_names[1]);
@@ -115,9 +123,7 @@ void OptionsScene::draw(){
 					glVertex3f(x+_button_width/2, y-_button_height/2, 0);
 			glEnd();
 
-
 			x += _button_width + _button_spacing;
-			//glTranslatef(0,-_button_height/2,0);
 		}
 		glBindTexture(GL_TEXTURE_2D,0);
 	glPopMatrix();
@@ -129,6 +135,8 @@ void OptionsScene::draw(){
 
 	y-=_button_height;
 
+	/* drawing day time options */
+
     glPushMatrix();
     	for (int i = 0; i < 2; ++i,j++)
     	{
@@ -136,7 +144,8 @@ void OptionsScene::draw(){
 
     		draw_button_text(x,y,j-1);
 
-    		//cout << _day_time << " _day_time cmp "<< j << endl;
+    		/* since only one time of day can be selected
+    		only one will have selected texture */
     		if(_day_time == j){
     			glBindTexture(GL_TEXTURE_2D,_names[1]);
     		}else{
@@ -169,9 +178,14 @@ void OptionsScene::draw(){
 	x = _window_width/2;
 	y = 2.5*_button_height;
 
+	/* drawing back button */
+
 	glBindTexture(GL_TEXTURE_2D,0);
 
     	draw_button_text(x,y,j-1);
+
+    	// if button is selected change texture into selected one
+
    		if(_selected == true){
    			glBindTexture(GL_TEXTURE_2D,_names[1]);
    		}else{
@@ -195,7 +209,6 @@ void OptionsScene::draw(){
 		glEnd();
 
 
-	//cout << "Rendering background " << endl;
    	glBindTexture(GL_TEXTURE_2D,_names[2]);	
 
     	glBegin(GL_QUADS);
@@ -223,6 +236,8 @@ void OptionsScene::draw(){
 
 void OptionsScene::draw_text(char* text,float x,float y){
 
+	// draw given text on given coordinates
+
 	glPushMatrix();
 		glColor3f(1.0, 1.0, 1.0);
    		glRasterPos3f(x, y, 0);
@@ -233,16 +248,18 @@ void OptionsScene::draw_text(char* text,float x,float y){
 
 void OptionsScene::on_mouse(int button, int state, int x, int y){
 
+	// if we press left mouse button
 	if ((button == GLUT_LEFT_BUTTON ) && (state == GLUT_DOWN))
 		push_button( resolve_button_id(x,y));
 
+	// if we press right mouse button
 	if ((button == GLUT_LEFT_BUTTON ) && (state == GLUT_UP))
 		release_button( resolve_button_id(x,y));
 }
 
 void OptionsScene::push_button(int button_id){
 
-	//cout << "Pressed :  "<< button_id << endl; 
+	// change settings depending on buttons id
 
 	if(button_id >= 1 && button_id <= 3)
 		_difficulty_option = button_id;
@@ -254,6 +271,10 @@ void OptionsScene::push_button(int button_id){
 	}
 }
 void OptionsScene::release_button(int button_id){
+
+	// state is only changed when we release button
+	// so we leave screen if we have selected back button
+
 	if(_selected == true && _back_option == true){
 		screenState = MENU_SCREEN_NUM;
 		_selected = false;
@@ -264,8 +285,6 @@ void OptionsScene::release_button(int button_id){
 }
 
 int OptionsScene::resolve_button_id(int mouse_x, int mouse_y){
-
-	//cout <<"Mouse " << mouse_x << " " << mouse_y << endl;
 
 	int _button_spacing = 20;
  
@@ -345,6 +364,8 @@ int OptionsScene::resolve_button_id(int mouse_x, int mouse_y){
 }
 void OptionsScene::draw_button_text(int x,int y,int button_id){
     int p = 20,q=7;
+
+    // each button has its own unique text
 
     switch(button_id){
     	case 0:

@@ -4,15 +4,15 @@ MenuScene::MenuScene()
 	{
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 	_image = image_init(0, 0);
+
 	_window_width = glutGet(GLUT_WINDOW_WIDTH);
 	_window_height = glutGet(GLUT_WINDOW_HEIGHT);
 
     glGenTextures(3, _names);
-    _selected_button_id = -1;
-
+    _selected_button_id = -1; //  no button is selected
 
     image_read(_image, FILENAME0);
-
+    // regular button texture
     glBindTexture(GL_TEXTURE_2D, _names[0]);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -24,7 +24,7 @@ MenuScene::MenuScene()
 
 
     image_read(_image, FILENAME1);
-
+    // pressed button texture
     glBindTexture(GL_TEXTURE_2D, _names[1]);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -36,7 +36,7 @@ MenuScene::MenuScene()
 
 
     image_read(_image, FILENAME2);
-
+    // background
     glBindTexture(GL_TEXTURE_2D, _names[2]);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -46,21 +46,25 @@ MenuScene::MenuScene()
                  _image->width, _image->height, 0,
                  GL_RGB, GL_UNSIGNED_BYTE, _image->pixels);
 
-    /* Iskljucujemo aktivnu teksturu */
+ 
     glBindTexture(GL_TEXTURE_2D, 0);
-
-    /* Unistava se objekat za citanje tekstura iz fajla. */
-    image_done(_image);
+	image_done(_image);
 
 
 }
 int active_texture(){
+
+	/* returns id of active texture */
+
 	GLint whichID;
 	glGetIntegerv(GL_TEXTURE_BINDING_2D, &whichID);
 	return (int) whichID;
 }
 
 void MenuScene::draw(){
+
+	// drawing menu scene
+
 	glPushMatrix();
 	glDisable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
@@ -71,13 +75,14 @@ void MenuScene::draw(){
     glLoadIdentity();
     gluOrtho2D(0,_window_width,0,_window_height);
 
-    
     _button_width = _window_width/4;
     _button_height = _window_height/11;
 
     int y=_window_height/2;
     int x=_window_width/2;    
 	glBindTexture(GL_TEXTURE_2D, _names[2]);
+
+	// drawing buttons
 
     glPushMatrix();
     	for (int i = 0; i < 3; ++i)
@@ -86,6 +91,7 @@ void MenuScene::draw(){
 
     		draw_button_text(x,y,i);
 
+    		// if button is selected change its texture
     		if(_selected == true && _selected_button_id == i){
     			glBindTexture(GL_TEXTURE_2D,_names[1]);
     		}else{
@@ -115,6 +121,7 @@ void MenuScene::draw(){
 		glBindTexture(GL_TEXTURE_2D,0);
 	glPopMatrix();
     
+    // adding background
    	glBindTexture(GL_TEXTURE_2D,_names[2]);	
 
     	glBegin(GL_QUADS);
@@ -153,6 +160,7 @@ void MenuScene::draw_text(char* text,float x,float y){
 
 void MenuScene::on_mouse(int button, int state, int x, int y){
 
+	// if we press left mouse button
 	if ((button == GLUT_LEFT_BUTTON ) && (state == GLUT_DOWN))
 		push_button( resolve_button_id(x,y));
 
@@ -169,8 +177,11 @@ void MenuScene::push_button(int button_id){
 	
 }
 void MenuScene::release_button(int button_id){
+	
+	// we change state of game only when we release button
+
 	if(_selected == true){
-		cout << "Changing to " << _selected_button_id + 1 << endl;
+		//cout << "Changing to " << _selected_button_id + 1 << endl;
 		change_game_state(_selected_button_id+1);
 		_selected_button_id = -1;
 		_selected = false;
@@ -178,9 +189,25 @@ void MenuScene::release_button(int button_id){
 	}
 }
 void MenuScene::change_game_state(int button_id){
-	screenState = button_id;
+
+	switch(button_id){
+		case MENU_SCREEN_NUM:
+			screenState = MENU_SCREEN_NUM;
+			break;
+		case GAME_SCREEN_NUM:
+			screenState = GAME_SCREEN_NUM;
+			break;
+		case OPTIONS_SCREEN_NUM:
+			screenState = OPTIONS_SCREEN_NUM;
+			break;
+		case QUIT_MENU_NUM:
+			screenState = QUIT_MENU_NUM;
+			break;
+	}
 }
 int MenuScene::resolve_button_id(int mouse_x, int mouse_y){
+
+	// resolve buttons id from given coordinates
 
 	int y=_window_height/2;
     int x=_window_width/2;

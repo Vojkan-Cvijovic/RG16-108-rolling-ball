@@ -3,5 +3,5 @@
 make clean;
 clear;
 make;
-./main
+./Rolling_Ball
 make clean;

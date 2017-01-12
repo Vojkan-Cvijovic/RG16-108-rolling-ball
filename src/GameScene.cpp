@@ -3,13 +3,11 @@
 
 using namespace std;
 
-
-
-
-
 void GameScene::light(){
-	    //
-    GLfloat light_position[4] = {0,0,0,1}; 
+
+  /* if day option is turned on, light() simulates Sun 
+     if night options is turned on, light() simulates headlight */ 
+	  
     if(_daytime == 0){
       light_position[0] = 1;
       light_position[1] = 1;
@@ -43,11 +41,8 @@ void GameScene::addFog(){
 }
 void GameScene::run(){
     glEnable(GL_LIGHTING);
-    userRoad->setDifficultyAndDaytime(_difficulty,_daytime);
     glPushMatrix();
     
-	  //cout << "GameScene is running" << endl;
-	/* Podesava se vidna tacka. */
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     gluLookAt(0, 0, 5, 0, 0, 0, 0, 1, 0);
@@ -58,13 +53,15 @@ void GameScene::run(){
      if(speed >= SPEED_LIMIT)
      	speed = SPEED_LIMIT;
 
+     // draw road with street lights
      userRoad->run(speed);
-
-
+     // draw ball
      userBall->run(speed, ROAD_BASE_LEVEL);
     
      speedModify();
      gameOver();
+
+     // currently disable, printing text while rendering road and ball have huge impact on performance
      //print_score_value();
     //print_speed_value();  
     cout << "Distance : "<< userRoad->getDistance() << endl;
@@ -87,6 +84,14 @@ void GameScene::moveRight(){
 	userBall->move(+speed);
 }
 void GameScene::speedModify(){
+
+  /* in order to speed up or slow down 
+      ball needs to be in contact with surrface 
+
+      You can break which will cause speed modification up to -1
+      but as sonn as you release slow down button ball will speed up */
+
+
 	if(speed > ROAD_BASE_SPEED && userBall->onGround())
     	speed = speed - SPEED_DECREASE;
     if(speed < ROAD_BASE_SPEED && userBall->onGround())
@@ -94,12 +99,18 @@ void GameScene::speedModify(){
 }
 void GameScene::gameOver(){
 
+  /* check for condtions for game to be over */
+
+
 	if(userRoad->fallThrough(userBall->getPositionX(),userBall->getPositionY()) ||
    			(userBall->getPositionY() == ROAD_BASE_LEVEL && 
    				abs(userBall->getPositionX()) > ROAD_BASE_WIDTH/2)){
     	userBall->drop();
     	speed = ROAD_BASE_SPEED;
     }
+
+    // we are not ending game as soon as ball start falling
+    // but as it reaches curtain level
 
     if(userBall->getPositionY() < GAME_OVER_FALL_LEVEL ){
     	
@@ -109,6 +120,8 @@ void GameScene::gameOver(){
     	cout << "-------------------" <<endl;
     	exit(0);
     }
+
+    // if we have reached end of track
     
     if(userRoad->getDistance() >= (TRACK_LENGTH * 4)-1){
     	cout << "-------------------" <<endl;
@@ -121,7 +134,6 @@ void GameScene::gameOver(){
 }
 void GameScene::print_score_value(){
     
-   /* Rezultat prebacujemo u bafer koji cemo ispisivati. */
    char buff[15];
    snprintf(buff, 10, "Score:%d",(int) userRoad->getDistance()-1);
    //glColor3f(1, 1.0, 0.0);
@@ -131,7 +143,6 @@ void GameScene::print_score_value(){
 }
 void GameScene::print_speed_value(){
     
-   /* Rezultat prebacujemo u bafer koji cemo ispisivati. */
    char buff[20];
    snprintf(buff, 10, "Speed: %d", (int) speed);
    //glColor3f(1, 1.0, 0);

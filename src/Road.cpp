@@ -12,12 +12,15 @@ mt19937 gen(rd());
 uniform_int_distribution<> dis(0, 100);
 
 Road::Road(float x, float y,int length,int density, int difficulty)
-	:_x(x),_y(y),_length(length),distance(-3),level(0),_difficulty(difficulty)
+	:_x(x),_y(y),_length(length),distance(GENERATION_BASE_ROAD),level(0),_difficulty(difficulty)
 	{
 		_currentLevel = 0;
 		_n = FUSTRUM_FAR/PLATE_BASE_LENGTH;
 		_lamppostCount = _length/LAMPPOST_FREQUENCY;
 		int width = PLATE_COUNT * PLATE_DEFAULT_WIDTH;
+		
+		// Allocating road surface
+
 		_surface = (Plate***) malloc(_length * sizeof(Plate *));
 		if(_surface == NULL){
 			cout << "Error while allocating road" << endl;
@@ -41,6 +44,9 @@ Road::Road(float x, float y,int length,int density, int difficulty)
 		generate(0,0);
 
 		cout << "Loading street lights ... " << endl;
+
+		// allocating street lights 
+
 		_streetLights = (Lamppost**) malloc( _lamppostCount * sizeof(Lamppost*));
 		if(_streetLights == NULL){
 			cout << "Error while allocating streetLights" << endl;
@@ -70,17 +76,20 @@ Road::~Road(){
 
 void Road::draw(){
 
-	//_n += _currentLevel;
+	
 	int pom = distance/PLATE_BASE_LENGTH;
 	_n+= pom - _currentLevel;
 
+	// calculationg lower limit for road rendering
+	// we are only rendering road parts that are in range of sight
 	_currentLevel = distance/PLATE_BASE_LENGTH;
-
 	if(_currentLevel<0)
 		_currentLevel = 0;
-
+	// upper limit
 	if(_currentLevel + (_n - _currentLevel) >= _length)
 		_n = _length;
+	
+	// drawing road plates
 	for (int i = _currentLevel; i < _n ; ++i)
 	{ 
 		for (int j = 0; j < PLATE_COUNT; ++j)
@@ -105,6 +114,7 @@ void Road::draw(){
 			}
 		}	
 	}
+	// drawing street lights
 	for (int i = 0; i < _lamppostCount; ++i)
 	{
 		_streetLights[i]->setDaytime(_daytime);
@@ -118,7 +128,7 @@ void Road::run(float speed){
 	level = ceil(distance + 1);
 }
 void Road::generate(int i,int j){
-	
+	// NEEDS IMPROVEMENT
 
 	/*
 		
@@ -190,12 +200,15 @@ void Road::generate(int i,int j){
 	generate(i,j+1);
 }
 bool Road::fallThrough(float x,int y){
+
+	// returns true if ball has came across black surface ( hole ) so ball schould start falling
+
 	int j;
 	int center = 2;
 	float correction = 1.8;
 	x = x+ center;
 	
-	// we need to determine line
+	// we need to determine from where each track is starting
 	if(x>4.8)
 		j=4;
 	else if(x>3)
@@ -210,6 +223,7 @@ bool Road::fallThrough(float x,int y){
 	
 	int d= round((distance + 1)/ PLATE_BASE_LENGTH);
 
+	// you can jump over hole
 	if(y != ROAD_BASE_LEVEL)
 		return false;
 

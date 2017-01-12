@@ -22,7 +22,13 @@ bool Ball::isMoving(){
 	return true;
 }
 float Ball::jumpVel(float surfaceLevel){
-	if(isJumping){
+
+	/* returns new y when jumping
+		you are not able to jump when ball is in air,
+			so you have already jumped
+		or you ball is falling */
+
+	if(isJumping && fall == 0){
 		float new_y = y + 9*delta_t*yVel;
 		yVel = yVel - delta_t*gravity;
 		
@@ -35,9 +41,15 @@ float Ball::jumpVel(float surfaceLevel){
 	return y;
 }
 void Ball::falling(){
+	
+	// calculating new y from old one and gravity
 	y -= pow(-y,abs(y)/(gravity))/gravity;
+
 }
 void Ball::draw(float speed,float surfaceLevel){
+
+	// drawing ball
+
 	if(!isMoving()) // steering
 		rotationAngleZ += xVel*1.2;
 	
@@ -54,14 +66,14 @@ void Ball::draw(float speed,float surfaceLevel){
 
 
     glPushMatrix();
+    	
     	if(fall)
     		falling();
     	glTranslatef(x, y, z);
     	glRotatef(rotationAngleX,-1,0,0);
     	glRotatef(rotationAngleZ,0,0,1);
-		/* Kreira se objekat. */
-    	
     	glutSolidSphere(size,40,40);
+
     glPopMatrix();
     rotationAngleX += 5*rotationSpeed;
     if(rotationAngleX >= 360)

@@ -1,7 +1,11 @@
 #include "./headers/Plate.hpp"
 
 void Plate::draw(int level){
-	if(_exists){		
+	// draw if plate exists
+	if(_exists){
+
+		// single plate is composed of _density number of smaller plates with same length
+
 		float single_strip_width = PLATE_DEFAULT_WIDTH / _density;
 		for(int i=0;i<_density;i++){
 

@@ -29,9 +29,10 @@ public:
 		_daytime = d;
 	}
 private:
-	int _difficulty = 1;
-	int _daytime = 0;
-	float speed;
+	int _difficulty = 1; // difficulty level, effects generation of holes
+	int _daytime = 0;	//day or night
+	float speed;	// speed of ball
+	GLfloat light_position[4] = {0,0,0,1}; 	// position of Sun or headlight
 	void light();
 	void gameOver();
 	void speedModify();
