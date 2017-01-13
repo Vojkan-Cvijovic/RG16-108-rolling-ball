@@ -37,7 +37,7 @@
 #define TRACK_LENGTH (ROAD_BASE_LENGTH + FUSTRUM_LENGTH * DIFFICULTY)
 
 #define LAMPPOST_FREQUENCY 5
-#define FILENAME2 "./resources/background.bmp"
+#define FILENAME2 "./resources/Background.bmp"
 #define FILENAME0 "./resources/button_off.bmp"
 #define FILENAME1 "./resources/button_on.bmp"
 #define FILENAME3 "./resources/options_background.bmp"

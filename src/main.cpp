@@ -29,7 +29,6 @@ static void on_motion(int x, int y);
 static void initialize();
 static void menu_finish(){ exit(0);}
 
-
 int timer = 0;
 float delta_t = 1.0/60;
 
@@ -49,6 +48,7 @@ int main(int argc, char** argv){
 	glutMotionFunc(on_motion);
 	glutMouseFunc(on_mouse);
 	glutSpecialFunc(SpecialInput);
+	//glutTimerFunc(50,on_timer,0);
 
 	initialize();
 
@@ -105,10 +105,7 @@ static void on_keyboard(unsigned char key,int x, int y){
 			screenState = MENU_SCREEN_NUM;
 			break;
 		case 's':
-			if(!timer){
-				glutTimerFunc(50,on_timer,0);
-				timer = 1;
-			}
+			timer = 1;
 			break;
 		case 'p':
 			timer = 0;
@@ -145,13 +142,12 @@ static void SpecialInput(int key, int x, int y){
 
 static void on_timer(int value)
 {
+
 	if(value!=0)
 		return;
 
 	glutPostRedisplay();
 
-	if(timer)
-		glutTimerFunc(50,on_timer,0);
 }
 static void on_display(){
 
@@ -186,6 +182,9 @@ static void on_display(){
 			menu_finish();
 			break;
 	}
+
+	if(!timer)
+		glutTimerFunc(30,on_timer,0);
 
     /* Nova slika se salje na ekran. */
     glutSwapBuffers();

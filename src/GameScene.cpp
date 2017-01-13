@@ -40,8 +40,10 @@ void GameScene::addFog(){
 	glFogf(GL_FOG_DENSITY,0.02f);
 }
 void GameScene::run(){
-    glEnable(GL_LIGHTING);
+    
     glPushMatrix();
+    
+    glEnable(GL_LIGHTING);
     
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
